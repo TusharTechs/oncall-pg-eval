@@ -1,0 +1,6 @@
+DO
+CREATE INDEX
+SET
+psql:/mig_gemini-3.8-flash-high_v2_t1_m3.sql:30: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_idx" to "orders_external_ref_key"
+DO
+RESET

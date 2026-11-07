@@ -1,0 +1,6 @@
+SET
+CREATE INDEX
+SET
+psql:/mig_sonnet_t3_m3.sql:18: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_uq" to "orders_external_ref_key"
+DO
+RESET

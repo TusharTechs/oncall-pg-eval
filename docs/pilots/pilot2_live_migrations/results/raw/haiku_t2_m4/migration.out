@@ -1,0 +1,36 @@
+SET
+CREATE FUNCTION
+ retry_ddl 
+-----------
+ 
+(1 row)
+
+CREATE FUNCTION
+ retry_ddl 
+-----------
+ 
+(1 row)
+
+SET
+DO
+SET
+ retry_ddl 
+-----------
+ 
+(1 row)
+
+ retry_ddl 
+-----------
+ 
+(1 row)
+
+ retry_ddl 
+-----------
+ 
+(1 row)
+
+ retry_ddl 
+-----------
+ 
+(1 row)
+

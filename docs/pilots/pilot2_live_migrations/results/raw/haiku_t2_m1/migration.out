@@ -1,0 +1,7 @@
+SET
+CREATE FUNCTION
+ retry_ddl 
+-----------
+ 
+(1 row)
+

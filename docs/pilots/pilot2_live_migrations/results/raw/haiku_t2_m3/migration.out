@@ -1,0 +1,12 @@
+SET
+CREATE FUNCTION
+SET
+psql:/mig_haiku_t2_m3.sql:25: NOTICE:  index "orders_external_ref_key" does not exist, skipping
+DROP INDEX
+CREATE INDEX
+SET
+ retry_ddl 
+-----------
+ 
+(1 row)
+

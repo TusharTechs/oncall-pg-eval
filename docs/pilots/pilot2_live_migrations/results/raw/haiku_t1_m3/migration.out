@@ -1,0 +1,9 @@
+SET
+psql:/mig_haiku_t1_m3.sql:6: NOTICE:  index "orders_external_ref_uidx" does not exist, skipping
+DROP INDEX
+CREATE INDEX
+CREATE PROCEDURE
+SET
+psql:/mig_haiku_t1_m3.sql:26: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_uidx" to "orders_external_ref_key"
+CALL
+DROP PROCEDURE

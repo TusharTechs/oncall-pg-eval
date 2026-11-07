@@ -1,0 +1,129 @@
+opus_t1_m1 M1 PASS=1 rc=0 endstate=ok max_ms=180.9 app_failed=0 forbidden=0 | n=12073 p50_ms=2.3 p99_ms=98.6 max_ms=180.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5012073 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+opus_t1_m2 M2 PASS=1 rc=0 endstate=ok max_ms=220.0 app_failed=0 forbidden=0 | n=12193 p50_ms=2.6 p99_ms=100.5 max_ms=220.0 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012193 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+opus_t1_m3 M3 PASS=1 rc=0 endstate=ok max_ms=142.5 app_failed=0 forbidden=0 | n=11871 p50_ms=2.4 p99_ms=25.5 max_ms=142.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011871 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+opus_t1_m4 M4 PASS=1 rc=0 endstate=ok max_ms=326.7 app_failed=0 forbidden=0 | n=33968 p50_ms=2.4 p99_ms=99.8 max_ms=326.7 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033968 M4 true M4data_bad 0 
+SET CALL DROP PROCEDURE 
+opus_t2_m1 M1 PASS=1 rc=0 endstate=ok max_ms=311.5 app_failed=0 forbidden=0 | n=11923 p50_ms=2.4 p99_ms=95.5 max_ms=311.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5011923 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+opus_t2_m2 M2 PASS=1 rc=0 endstate=ok max_ms=279.9 app_failed=0 forbidden=0 | n=11945 p50_ms=2.5 p99_ms=98.0 max_ms=279.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5011945 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+opus_t2_m3 M3 PASS=1 rc=0 endstate=ok max_ms=106.5 app_failed=0 forbidden=0 | n=11885 p50_ms=2.3 p99_ms=9.0 max_ms=106.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011885 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+opus_t2_m4 M4 PASS=1 rc=0 endstate=ok max_ms=271.3 app_failed=0 forbidden=0 | n=33813 p50_ms=2.5 p99_ms=89.5 max_ms=271.3 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033813 M4 true M4data_bad 0 
+  (1 row)  
+gpt-6-astra-high_t1_m1 M1 PASS=1 rc=0 endstate=ok max_ms=159.0 app_failed=0 forbidden=0 | n=12211 p50_ms=2.5 p99_ms=53.5 max_ms=159.0 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5012211 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET SET DO 
+gpt-6-astra-high_t1_m2 M2 PASS=1 rc=0 endstate=ok max_ms=180.8 app_failed=0 forbidden=0 | n=11928 p50_ms=2.7 p99_ms=54.6 max_ms=180.8 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5011928 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+DO ALTER TABLE DO 
+gpt-6-astra-high_t1_m3 M3 PASS=1 rc=0 endstate=ok max_ms=105.0 app_failed=0 forbidden=0 | n=12000 p50_ms=2.3 p99_ms=8.8 max_ms=105.0 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5012000 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET CREATE INDEX DO 
+gpt-6-astra-high_t1_m4 M4 PASS=1 rc=0 endstate=ok max_ms=244.8 app_failed=0 forbidden=0 | n=33825 p50_ms=2.4 p99_ms=83.1 max_ms=244.8 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033825 M4 true M4data_bad 0 
+DROP PROCEDURE ALTER TABLE DO 
+sonnet_t2_m1 M1 PASS=1 rc=0 endstate=ok max_ms=182.3 app_failed=0 forbidden=0 | n=11851 p50_ms=2.5 p99_ms=51.9 max_ms=182.3 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5011851 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET DO 
+sonnet_t2_m2 M2 PASS=1 rc=0 endstate=ok max_ms=100.5 app_failed=0 forbidden=0 | n=11941 p50_ms=2.3 p99_ms=48.0 max_ms=100.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5011941 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+ALTER TABLE DO DO 
+sonnet_t2_m3 M3 PASS=1 rc=0 endstate=ok max_ms=103.2 app_failed=0 forbidden=0 | n=11909 p50_ms=2.4 p99_ms=8.8 max_ms=103.2 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011909 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET psql:/mig_sonnet_t2_m3.sql:23: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_uq" to "orders_external_ref_key" DO 
+sonnet_t2_m4 M4 PASS=1 rc=0 endstate=ok max_ms=292.3 app_failed=0 forbidden=0 | n=33969 p50_ms=2.4 p99_ms=83.7 max_ms=292.3 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033969 M4 true M4data_bad 0 
+ALTER TABLE DO DO 
+sonnet_t3_m1 M1 PASS=1 rc=0 endstate=ok max_ms=132.5 app_failed=0 forbidden=0 | n=12068 p50_ms=2.4 p99_ms=50.2 max_ms=132.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5012068 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET DO RESET 
+sonnet_t3_m2 M2 PASS=1 rc=0 endstate=ok max_ms=162.6 app_failed=0 forbidden=0 | n=12009 p50_ms=2.4 p99_ms=51.9 max_ms=162.6 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012009 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+DO DO RESET 
+sonnet_t3_m3 M3 PASS=1 rc=0 endstate=ok max_ms=120.7 app_failed=0 forbidden=0 | n=12057 p50_ms=2.4 p99_ms=13.2 max_ms=120.7 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5012057 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+psql:/mig_sonnet_t3_m3.sql:18: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_uq" to "orders_external_ref_key" DO RESET 
+sonnet_t3_m4 M4 PASS=1 rc=0 endstate=ok max_ms=324.9 app_failed=0 forbidden=0 | n=33892 p50_ms=2.4 p99_ms=53.2 max_ms=324.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033892 M4 true M4data_bad 0 
+DO DO RESET 
+sonnet_t1_m1 M1 PASS=1 rc=0 endstate=ok max_ms=251.9 app_failed=0 forbidden=0 | n=12103 p50_ms=2.3 p99_ms=53.3 max_ms=251.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5012103 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET DO RESET 
+sonnet_t1_m2 M2 PASS=1 rc=0 endstate=ok max_ms=153.5 app_failed=0 forbidden=0 | n=12048 p50_ms=2.5 p99_ms=53.4 max_ms=153.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012048 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+DO DO RESET 
+sonnet_t1_m3 M3 PASS=1 rc=0 endstate=ok max_ms=155.9 app_failed=0 forbidden=0 | n=11964 p50_ms=2.3 p99_ms=17.0 max_ms=155.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011964 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+psql:/mig_sonnet_t1_m3.sql:21: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_uq_idx" to "orders_external_ref_uq" DO RESET 
+sonnet_t1 M4 MISSING
+haiku_t1_m1 M1 PASS=1 rc=0 endstate=ok max_ms=262.6 app_failed=0 forbidden=0 | n=12041 p50_ms=2.3 p99_ms=101.6 max_ms=262.6 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5012041 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+CREATE PROCEDURE CALL DROP PROCEDURE 
+haiku_t1_m2 M2 PASS=1 rc=0 endstate=ok max_ms=258.1 app_failed=0 forbidden=0 | n=11919 p50_ms=2.5 p99_ms=101.3 max_ms=258.1 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5011919 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+CALL CALL DROP PROCEDURE 
+haiku_t1_m3 M3 PASS=1 rc=0 endstate=ok max_ms=119.2 app_failed=0 forbidden=0 | n=11925 p50_ms=2.3 p99_ms=10.6 max_ms=119.2 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011925 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+psql:/mig_haiku_t1_m3.sql:26: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_uidx" to "orders_external_ref_key" CALL DROP PROCEDURE 
+haiku_t1_m4 M4 PASS=1 rc=0 endstate=ok max_ms=320.8 app_failed=0 forbidden=0 | n=33673 p50_ms=2.4 p99_ms=100.0 max_ms=320.8 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033673 M4 true M4data_bad 0 
+CALL CALL DROP PROCEDURE 
+haiku_t2_m1 M1 PASS=1 rc=0 endstate=ok max_ms=266.3 app_failed=0 forbidden=0 | n=11897 p50_ms=2.3 p99_ms=100.8 max_ms=266.3 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5011897 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+haiku_t2_m2 M2 PASS=1 rc=0 endstate=ok max_ms=385.7 app_failed=0 forbidden=0 | n=12111 p50_ms=2.6 p99_ms=107.7 max_ms=385.7 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012111 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+haiku_t2_m3 M3 PASS=1 rc=0 endstate=ok max_ms=72.8 app_failed=0 forbidden=0 | n=12014 p50_ms=2.4 p99_ms=9.3 max_ms=72.8 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5012014 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+  (1 row)  
+haiku_t2_m4 M4 PASS=1 rc=0 endstate=ok max_ms=261.0 app_failed=0 forbidden=0 | n=34377 p50_ms=2.4 p99_ms=94.6 max_ms=261.0 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5034377 M4 true M4data_bad 0 
+  (1 row)  
+gemini-3.8-flash-high_t1 M1 MISSING
+gemini-3.8-flash-high_t1 M2 MISSING
+gemini-3.8-flash-high_t1 M3 MISSING
+gemini-3.8-flash-high_t1 M4 MISSING

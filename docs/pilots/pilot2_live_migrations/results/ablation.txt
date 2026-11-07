@@ -1,0 +1,2 @@
+abl_sol_m1_sleep200ms PASS=1 max_ms=236.3 max_ms=236.3 over500ms=0
+abl_ref_m1_sleep10ms PASS=0 max_ms=1817.8 max_ms=1817.8 over500ms=1320

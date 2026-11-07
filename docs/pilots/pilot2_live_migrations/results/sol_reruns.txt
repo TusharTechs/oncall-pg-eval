@@ -1,0 +1,4 @@
+sol_rerun2_m1 PASS=0 rc=0 endstate=ok max_ms=2839.6 app_failed=0 forbidden=0 max_ms=2839.6 over500ms=1377
+sol_rerun2_m2 PASS=0 rc=0 endstate=ok max_ms=534.4 app_failed=0 forbidden=0 max_ms=534.4 over500ms=15
+sol_rerun3_m1 PASS=0 rc=0 endstate=ok max_ms=567.2 app_failed=0 forbidden=0 max_ms=567.2 over500ms=1
+sol_rerun3_m2 PASS=0 rc=0 endstate=ok max_ms=706.2 app_failed=0 forbidden=0 max_ms=706.2 over500ms=187

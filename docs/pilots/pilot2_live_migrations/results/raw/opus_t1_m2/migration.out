@@ -1,0 +1,18 @@
+CREATE FUNCTION
+ ddl_with_retry 
+----------------
+ 
+(1 row)
+
+ALTER TABLE
+ ddl_with_retry 
+----------------
+ 
+(1 row)
+
+ALTER TABLE
+ ddl_with_retry 
+----------------
+ 
+(1 row)
+

@@ -1,0 +1,15 @@
+pgbench (17.11 (Debian 17.11-1.pgdg13+2))
+transaction type: /app.pgbench
+scaling factor: 1
+query mode: simple
+number of clients: 8
+number of threads: 4
+maximum number of tries: 1
+duration: 60 s
+number of transactions actually processed: 12103
+number of failed transactions: 0 (0.000%)
+latency average = 5.552 ms
+latency stddev = 14.213 ms
+rate limit schedule lag: avg 2.174 (max 239.207) ms
+initial connection time = 3.788 ms
+tps = 201.751896 (without initial connection time)

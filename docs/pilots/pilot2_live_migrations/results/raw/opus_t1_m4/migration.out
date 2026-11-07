@@ -1,0 +1,11 @@
+CREATE FUNCTION
+CREATE FUNCTION
+ ddl_with_retry 
+----------------
+ 
+(1 row)
+
+CREATE PROCEDURE
+SET
+CALL
+DROP PROCEDURE

@@ -1,0 +1,32 @@
+gpt-6.1-sol-high_t1_m1 M1 PASS=0 rc=0 endstate=ok max_ms=1863.3 app_failed=0 forbidden=0 | n=11896 p50_ms=2.5 p99_ms=1601.5 max_ms=1863.3 over500ms=1014 over1s=463
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5011896 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET SET DO 
+gpt-6.1-sol-high_t1_m2 M2 PASS=0 rc=0 endstate=ok max_ms=2613.2 app_failed=0 forbidden=0 | n=12039 p50_ms=2.6 p99_ms=1975.1 max_ms=2613.2 over500ms=1552 over1s=1068
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012039 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+ALTER TABLE SET DO 
+gpt-6.1-sol-high_t1_m3 M3 PASS=1 rc=0 endstate=ok max_ms=88.5 app_failed=0 forbidden=0 | n=11921 p50_ms=2.3 p99_ms=11.4 max_ms=88.5 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011921 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET SET DO 
+gpt-6.1-sol-high_t1_m4 M4 PASS=1 rc=0 endstate=ok max_ms=423.0 app_failed=0 forbidden=0 | n=33843 p50_ms=2.4 p99_ms=180.3 max_ms=423.0 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033843 M4 true M4data_bad 0 
+ALTER TABLE SET DO 
+gemini-3.8-flash-high_v2_t1_m1 M1 PASS=1 rc=0 endstate=ok max_ms=87.3 app_failed=0 forbidden=0 | n=12006 p50_ms=2.2 p99_ms=7.4 max_ms=87.3 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5012006 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET DO RESET 
+gemini-3.8-flash-high_v2_t1_m2 M2 PASS=1 rc=0 endstate=ok max_ms=91.9 app_failed=0 forbidden=0 | n=12123 p50_ms=2.5 p99_ms=7.3 max_ms=91.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012123 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+SET DO RESET 
+gemini-3.8-flash-high_v2_t1_m3 M3 PASS=1 rc=0 endstate=ok max_ms=95.7 app_failed=0 forbidden=0 | n=12071 p50_ms=2.2 p99_ms=8.3 max_ms=95.7 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5012071 psql:/checks.sql:27: ERROR: column "amount_cents" does not exist LINE 1: ...ELECT 'M4data_bad ' || count(*) FROM orders WHERE amount_cen... ^ 
+psql:/mig_gemini-3.8-flash-high_v2_t1_m3.sql:30: NOTICE:  ALTER TABLE / ADD CONSTRAINT USING INDEX will rename index "orders_external_ref_idx" to "orders_external_ref_key" DO RESET 
+gemini-3.8-flash-high_v2_t1_m4 M4 PASS=1 rc=0 endstate=ok max_ms=163.7 app_failed=0 forbidden=0 | n=33991 p50_ms=2.3 p99_ms=15.6 max_ms=163.7 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 false invalid_indexes 0 rows 5033991 M4 true M4data_bad 0 
+SET DO RESET 

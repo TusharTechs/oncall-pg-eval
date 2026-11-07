@@ -1,0 +1,24 @@
+ref_m1 M1 PASS=1 rc=0 endstate=ok max_ms=493.9 app_failed=0 forbidden=0 | n=11877 p50_ms=2.6 p99_ms=150.9 max_ms=493.9 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5011877 
+SET DO 
+naive_m1 M1 PASS=0 rc=0 endstate=ok max_ms=9041.5 app_failed=0 forbidden=0 | n=11808 p50_ms=2.8 p99_ms=8433.7 max_ms=9041.5 over500ms=1636 over1s=1544
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | M1 true M1data 0 M2 false M3 false invalid_indexes 0 rows 5011808 
+ALTER TABLE 
+ref_m2 M2 PASS=1 rc=0 endstate=ok max_ms=267.8 app_failed=0 forbidden=0 | n=11902 p50_ms=2.7 p99_ms=144.6 max_ms=267.8 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5011902 
+ALTER TABLE DO DO 
+naive_m2 M2 PASS=0 rc=0 endstate=ok max_ms=9371.0 app_failed=0 forbidden=0 | n=12139 p50_ms=2.8 p99_ms=8756.8 max_ms=9371.0 over500ms=1838 over1s=1732
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 true M3 false invalid_indexes 0 rows 5012139 
+ALTER TABLE ALTER TABLE 
+ref_m3 M3 PASS=1 rc=0 endstate=ok max_ms=169.1 app_failed=0 forbidden=0 | n=11923 p50_ms=2.5 p99_ms=20.1 max_ms=169.1 over500ms=0 over1s=0
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011923 
+CREATE INDEX SET DO 
+naive_m3 M3 PASS=0 rc=0 endstate=ok max_ms=12524.4 app_failed=0 forbidden=0 | n=11947 p50_ms=3.0 p99_ms=11963.7 max_ms=12524.4 over500ms=2404 over1s=2284
+number of failed transactions: 0 (0.000%) 
+migration_rc=0 | psql:/checks.sql:10: ERROR: column "region" does not exist LINE 1: ...T 'M1data ' || (SELECT count(*) FROM orders WHERE region IS ... ^ M2 false M3 true invalid_indexes 0 rows 5011947 
+ALTER TABLE 

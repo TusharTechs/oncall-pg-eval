@@ -1,0 +1,43 @@
+SET lock_timeout = '150ms';
+DO $$ BEGIN
+  FOR i IN 1..150 LOOP
+    BEGIN
+      ALTER TABLE orders ADD CONSTRAINT orders_customer_fk FOREIGN KEY (customer_id) REFERENCES customers(id) NOT VALID;
+      RETURN;
+    EXCEPTION WHEN lock_not_available THEN PERFORM pg_sleep(0.2);
+    END;
+  END LOOP;
+  RAISE EXCEPTION 'could not acquire lock';
+END $$;
+ALTER TABLE orders VALIDATE CONSTRAINT orders_customer_fk;
+DO $$ BEGIN
+  FOR i IN 1..150 LOOP
+    BEGIN
+      ALTER TABLE orders ADD CONSTRAINT orders_customer_nn CHECK (customer_id IS NOT NULL) NOT VALID;
+      RETURN;
+    EXCEPTION WHEN lock_not_available THEN PERFORM pg_sleep(0.2);
+    END;
+  END LOOP;
+  RAISE EXCEPTION 'could not acquire lock';
+END $$;
+ALTER TABLE orders VALIDATE CONSTRAINT orders_customer_nn;
+DO $$ BEGIN
+  FOR i IN 1..150 LOOP
+    BEGIN
+      ALTER TABLE orders ALTER COLUMN customer_id SET NOT NULL;
+      RETURN;
+    EXCEPTION WHEN lock_not_available THEN PERFORM pg_sleep(0.2);
+    END;
+  END LOOP;
+  RAISE EXCEPTION 'could not acquire lock';
+END $$;
+DO $$ BEGIN
+  FOR i IN 1..150 LOOP
+    BEGIN
+      ALTER TABLE orders DROP CONSTRAINT orders_customer_nn;
+      RETURN;
+    EXCEPTION WHEN lock_not_available THEN PERFORM pg_sleep(0.2);
+    END;
+  END LOOP;
+  RAISE EXCEPTION 'could not acquire lock';
+END $$;

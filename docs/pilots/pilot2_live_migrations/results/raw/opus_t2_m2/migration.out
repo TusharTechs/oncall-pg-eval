@@ -1,0 +1,15 @@
+SET
+SET
+CREATE FUNCTION
+ run_ddl 
+---------
+ 
+(1 row)
+
+ALTER TABLE
+ALTER TABLE
+ run_ddl 
+---------
+ 
+(1 row)
+

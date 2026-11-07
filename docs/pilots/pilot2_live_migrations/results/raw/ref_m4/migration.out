@@ -1,0 +1,32 @@
+SET
+CREATE FUNCTION
+ retry 
+-------
+ 
+(1 row)
+
+CREATE FUNCTION
+ retry 
+-------
+ 
+(1 row)
+
+DO
+ retry 
+-------
+ 
+(1 row)
+
+SET
+ALTER TABLE
+SET
+ retry 
+-------
+ 
+(1 row)
+
+ retry 
+-------
+ 
+(1 row)
+

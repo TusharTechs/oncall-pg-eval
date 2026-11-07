@@ -1,0 +1,11 @@
+CREATE FUNCTION
+SET
+SET
+psql:/mig_opus_t1_m3.sql:31: NOTICE:  index "orders_external_ref_key" does not exist, skipping
+DROP INDEX
+CREATE INDEX
+ ddl_with_retry 
+----------------
+ 
+(1 row)
+
