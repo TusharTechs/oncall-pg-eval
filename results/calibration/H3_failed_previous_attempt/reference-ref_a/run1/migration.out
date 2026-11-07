@@ -1,0 +1,8 @@
+SET
+psql:/migration/H3_failed_previous_attempt_1794035302_27706/migration.sql:11: NOTICE:  invalid index left by previous attempt: orders_external_ref_key
+DO
+DROP INDEX
+SET
+CREATE INDEX
+SET
+DO

@@ -1,0 +1,2 @@
+psql:/tickets/H4_single_transaction_unique/probes.sql:4: NOTICE:  PROBE|duplicate_external_ref_rejected|PASS|
+PROBE|valid_insert_ok|PASS|

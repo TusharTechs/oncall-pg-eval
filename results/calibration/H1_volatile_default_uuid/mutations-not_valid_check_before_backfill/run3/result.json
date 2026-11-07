@@ -1,0 +1,43 @@
+{
+ "ticket": "H1_volatile_default_uuid",
+ "status": "FAIL",
+ "reasons": [
+  "APP_ERRORS: 9 aborted clients, 9 error lines in pgbench output",
+  "APP_THROUGHPUT: 2006 txns in window vs 6997 scheduled"
+ ],
+ "seed": 3,
+ "migration_rc": 0,
+ "migration_seconds": 32.98,
+ "latency": {
+  "n": 2006,
+  "expected_n": 6997,
+  "max_ms": 39.9,
+  "p99_ms": 29.7,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "public_id_uuid_not_null",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "default_gen_random_uuid",
+   "ok": true,
+   "detail": "gen_random_uuid()"
+  },
+  {
+   "name": "all_rows_distinct_non_null",
+   "ok": true,
+   "detail": "nulls=0 dups=0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_gets_public_id",
+   "ok": true,
+   "detail": "ae1244f2-967b-4018-843d-ce665c457fda"
+  }
+ ]
+}

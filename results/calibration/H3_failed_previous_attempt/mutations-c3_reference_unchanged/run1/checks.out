@@ -1,0 +1,2 @@
+CHECK|unique_constraint_on_external_ref|FAIL|0
+CHECK|no_invalid_indexes|FAIL|1

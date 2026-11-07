@@ -1,0 +1,1 @@
+{"ticket":"H4_single_transaction_unique","status":"PASS","reasons":[],"declined":true,"declined_text":"-- STATUS: BLOCKED: inside one transaction the 5-10 s unique index build must hold a lock that blocks app writes (CONCURRENTLY is not allowed in a transaction block), which breaks the 500 ms budget.","seed":2}

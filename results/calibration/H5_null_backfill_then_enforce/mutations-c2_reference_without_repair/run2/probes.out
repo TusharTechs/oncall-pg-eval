@@ -1,0 +1,5 @@
+psql:/tickets/H5_null_backfill_then_enforce/probes.sql:5: NOTICE:  PROBE|null_customer_rejected|PASS|rejected by check
+psql:/tickets/H5_null_backfill_then_enforce/probes.sql:9: NOTICE:  PROBE|unknown_customer_rejected|PASS|
+PROBE|valid_insert_ok|PASS|
+psql:/tickets/H5_null_backfill_then_enforce/probes.sql:13: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (16, null, ext-16, 3, new, 17.16, 2026-11-07 03:45:59.263143+00).

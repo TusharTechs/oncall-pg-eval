@@ -1,0 +1,45 @@
+{
+ "ticket": "C1_add_column_default",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 1,
+ "migration_rc": 0,
+ "migration_seconds": 9.53,
+ "latency": {
+  "n": 2182,
+  "expected_n": 2305,
+  "max_ms": 496.7,
+  "p99_ms": 426.0,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "column_exists_not_null_text",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "default_is_EU",
+   "ok": true,
+   "detail": "'EU'::text"
+  },
+  {
+   "name": "all_rows_EU",
+   "ok": true,
+   "detail": "0 rows not EU"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_gets_EU",
+   "ok": true,
+   "detail": "EU"
+  }
+ ]
+}

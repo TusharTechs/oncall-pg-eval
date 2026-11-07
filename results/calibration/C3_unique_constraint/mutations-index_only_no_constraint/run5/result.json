@@ -1,0 +1,42 @@
+{
+ "ticket": "C3_unique_constraint",
+ "status": "FAIL",
+ "reasons": [
+  "END_STATE: unique_constraint_on_external_ref (0)"
+ ],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 6.66,
+ "latency": {
+  "n": 1690,
+  "expected_n": 1732,
+  "max_ms": 94.8,
+  "p99_ms": 44.3,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "unique_constraint_on_external_ref",
+   "ok": false,
+   "detail": "0"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "duplicate_external_ref_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

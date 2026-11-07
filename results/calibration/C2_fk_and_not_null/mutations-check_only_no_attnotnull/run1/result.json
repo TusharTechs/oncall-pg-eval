@@ -1,0 +1,52 @@
+{
+ "ticket": "C2_fk_and_not_null",
+ "status": "FAIL",
+ "reasons": [
+  "END_STATE: customer_id_attnotnull (false)"
+ ],
+ "seed": 1,
+ "migration_rc": 0,
+ "migration_seconds": 9.93,
+ "latency": {
+  "n": 2446,
+  "expected_n": 2385,
+  "max_ms": 122.2,
+  "p99_ms": 70.6,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "customer_id_attnotnull",
+   "ok": false,
+   "detail": "false"
+  },
+  {
+   "name": "validated_fk_to_customers",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "null_customer_rejected",
+   "ok": true,
+   "detail": "rejected by check"
+  },
+  {
+   "name": "unknown_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

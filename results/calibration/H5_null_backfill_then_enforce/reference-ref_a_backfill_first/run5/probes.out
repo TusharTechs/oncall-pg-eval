@@ -1,0 +1,4 @@
+psql:/tickets/H5_null_backfill_then_enforce/probes.sql:5: NOTICE:  PROBE|null_customer_rejected|PASS|
+psql:/tickets/H5_null_backfill_then_enforce/probes.sql:9: NOTICE:  PROBE|unknown_customer_rejected|PASS|
+PROBE|valid_insert_ok|PASS|
+PROBE|update_of_repaired_row_ok|PASS|17

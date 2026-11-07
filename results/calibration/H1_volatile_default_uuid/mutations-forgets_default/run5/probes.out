@@ -1,0 +1,2 @@
+psql:/tickets/H1_volatile_default_uuid/probes.sql:3: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003173, 3, probe-d50e5e50-b9c5-4b08-b028-0d509084794f, 1, new, 1.00, 2026-11-07 06:22:17.440533+00, null).

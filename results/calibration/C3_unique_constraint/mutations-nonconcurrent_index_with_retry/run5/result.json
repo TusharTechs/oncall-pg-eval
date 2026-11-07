@@ -1,0 +1,42 @@
+{
+ "ticket": "C3_unique_constraint",
+ "status": "FAIL",
+ "reasons": [
+  "LATENCY: peak app latency 5258.9 ms > 500 ms (989 txns over budget)"
+ ],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 5.3,
+ "latency": {
+  "n": 1446,
+  "expected_n": 1459,
+  "max_ms": 5258.9,
+  "p99_ms": 5211.2,
+  "over_budget": 989
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "unique_constraint_on_external_ref",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "duplicate_external_ref_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

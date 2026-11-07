@@ -1,0 +1,12 @@
+{
+ "model": "gpt-6.1-sol-app",
+ "ticket": "H2_int_overflow_emergency",
+ "trial": 1,
+ "source": "ChatGPT app paste (GPT-6.1 Sol, high), final prompt (sha256 matches the shipped prompt)",
+ "date_utc": "2026-11-06T18:49:37+00:00",
+ "prompt_sha256": "0e75a98d085864d75ecce787efd366db67d297dfad4cd339a56b90a7a9dbbebb",
+ "response_text": "```sql\n-- Preserve existing positive IDs and provide 2,147,483,648 negative IDs.\n-- Altering the sequence does not require locking the events table.\nALTER SEQUENCE events_id_seq\n    MINVALUE -2147483648\n    RESTART WITH -2147483648\n    NO CYCLE;\n```\n",
+ "extracted_sql": "-- Preserve existing positive IDs and provide 2,147,483,648 negative IDs.\n-- Altering the sequence does not require locking the events table.\nALTER SEQUENCE events_id_seq\n    MINVALUE -2147483648\n    RESTART WITH -2147483648\n    NO CYCLE;\n",
+ "extract_problem": null,
+ "note": "same final prompt (sha256 verified); originally filed under gpt-6.1-sol-app-pilot"
+}

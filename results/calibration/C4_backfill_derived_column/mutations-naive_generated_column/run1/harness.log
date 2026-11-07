@@ -1,0 +1,3 @@
+[11:30:29] reset db
+[11:30:32] migration start
+[11:30:52] migration end rc=0

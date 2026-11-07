@@ -1,0 +1,45 @@
+{
+ "ticket": "H3_failed_previous_attempt",
+ "status": "FAIL",
+ "reasons": [
+  "MIGRATION_ERROR: psql exited 3",
+  "END_STATE: unique_constraint_on_external_ref (0)",
+  "END_STATE: no_invalid_indexes (1)",
+  "PROBE: duplicate_external_ref_rejected (duplicate insert succeeded)"
+ ],
+ "seed": 3,
+ "migration_rc": 3,
+ "migration_seconds": 10.59,
+ "latency": {
+  "n": 2508,
+  "expected_n": 2518,
+  "max_ms": 54.1,
+  "p99_ms": 49.4,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "unique_constraint_on_external_ref",
+   "ok": false,
+   "detail": "0"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": false,
+   "detail": "1"
+  }
+ ],
+ "probes": [
+  {
+   "name": "duplicate_external_ref_rejected",
+   "ok": false,
+   "detail": "duplicate insert succeeded"
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

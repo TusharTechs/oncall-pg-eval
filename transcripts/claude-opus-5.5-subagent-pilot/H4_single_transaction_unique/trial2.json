@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5.5-subagent-pilot",
+ "ticket": "H4_single_transaction_unique",
+ "trial": 2,
+ "source": "claude-code-subagent (no tools), pilot only",
+ "date_utc": "2026-11-06T18:47:36+00:00",
+ "prompt_sha256": "f0569b319b81664a5d040e83a4e352c12fd7e8223010ba416abf95a67ce88781",
+ "response_text": "```sql\n-- STATUS: BLOCKED: under the mandatory single-transaction wrapper CREATE INDEX CONCURRENTLY is impossible, and a plain unique index build holds a SHARE lock on orders for 5-10 s, blocking app writes far beyond 500 ms\n```\n",
+ "extracted_sql": "-- STATUS: BLOCKED: under the mandatory single-transaction wrapper CREATE INDEX CONCURRENTLY is impossible, and a plain unique index build holds a SHARE lock on orders for 5-10 s, blocking app writes far beyond 500 ms\n",
+ "extract_problem": null
+}

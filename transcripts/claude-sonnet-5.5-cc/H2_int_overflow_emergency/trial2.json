@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "H2_int_overflow_emergency",
+ "trial": 2,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:43+00:00",
+ "prompt_sha256": "0e75a98d085864d75ecce787efd366db67d297dfad4cd339a56b90a7a9dbbebb",
+ "response_text": "```sql\n-- Emergency fix: the existing ids occupy the top ~2M values of the integer range, so\n-- move the identity sequence to the bottom of the integer range instead. Ids then run\n-- from -2147483648 upward (billions of values) and never touch existing rows.\n-- ALTER SEQUENCE locks only the sequence (not the events table), so the app and the\n-- analytics transaction are not blocked. The column type change to bigint can be\n-- scheduled for a later maintenance window.\nALTER SEQUENCE events_id_seq MINVALUE -2147483648 RESTART WITH -2147483648;\n```\n",
+ "extracted_sql": "-- Emergency fix: the existing ids occupy the top ~2M values of the integer range, so\n-- move the identity sequence to the bottom of the integer range instead. Ids then run\n-- from -2147483648 upward (billions of values) and never touch existing rows.\n-- ALTER SEQUENCE locks only the sequence (not the events table), so the app and the\n-- analytics transaction are not blocked. The column type change to bigint can be\n-- scheduled for a later maintenance window.\nALTER SEQUENCE events_id_seq MINVALUE -2147483648 RESTART WITH -2147483648;\n",
+ "extract_problem": null
+}

@@ -1,0 +1,42 @@
+{
+ "ticket": "H1_volatile_default_uuid",
+ "status": "FAIL",
+ "reasons": [
+  "LATENCY: peak app latency 3740.4 ms > 500 ms (622 txns over budget)"
+ ],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 9.08,
+ "latency": {
+  "n": 2199,
+  "expected_n": 2215,
+  "max_ms": 3740.4,
+  "p99_ms": 3604.7,
+  "over_budget": 622
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "public_id_uuid_not_null",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "default_gen_random_uuid",
+   "ok": true,
+   "detail": "gen_random_uuid()"
+  },
+  {
+   "name": "all_rows_distinct_non_null",
+   "ok": true,
+   "detail": "nulls=0 dups=0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_gets_public_id",
+   "ok": true,
+   "detail": "79566809-bc58-4483-b02d-e790b1eb92e5"
+  }
+ ]
+}

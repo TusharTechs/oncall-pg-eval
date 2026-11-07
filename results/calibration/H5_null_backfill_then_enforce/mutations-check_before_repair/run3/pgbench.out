@@ -1,0 +1,9 @@
+pgbench (17.11 (Debian 17.11-1.pgdg13+2))
+pgbench: error: client 0 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (3825680, null, ext-3825680, 6, new, 181.80, 2026-09-23 21:04:55.263143+00).
+pgbench: error: client 7 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (3163936, null, ext-3163936, 7, new, 437.36, 2026-10-01 12:53:59.263143+00).
+pgbench: error: client 1 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (2172528, null, ext-2172528, 2, new, 29.28, 2026-10-13 00:17:27.263143+00).
+pgbench: error: client 6 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (2404176, null, ext-2404176, 6, new, 177.76, 2026-10-10 07:56:39.263143+00).

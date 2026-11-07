@@ -1,0 +1,45 @@
+{
+ "ticket": "H2_int_overflow_emergency",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 4,
+ "migration_rc": 0,
+ "migration_seconds": 0.02,
+ "latency": {
+  "n": 12219,
+  "expected_n": 12000,
+  "max_ms": 10.7,
+  "p99_ms": 3.7,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "headroom_1e9",
+   "ok": true,
+   "detail": "type=integer next=-2147470801 inc=1 cycle=f usable_next_values=1000000000 colliding_existing_ids=0"
+  },
+  {
+   "name": "existing_ids_unchanged",
+   "ok": true,
+   "detail": "seed rows n=2000000 sum=4292957295000000 (expected n=2000000 sum=4292957295000000)"
+  },
+  {
+   "name": "primary_key_on_id",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_into_events_ok",
+   "ok": true,
+   "detail": "id=-2147470802"
+  }
+ ]
+}

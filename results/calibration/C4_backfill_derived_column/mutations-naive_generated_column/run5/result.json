@@ -1,0 +1,52 @@
+{
+ "ticket": "C4_backfill_derived_column",
+ "status": "FAIL",
+ "reasons": [
+  "LATENCY: peak app latency 14624.1 ms > 500 ms (3197 txns over budget)"
+ ],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 15.89,
+ "latency": {
+  "n": 3645,
+  "expected_n": 3577,
+  "max_ms": 14624.1,
+  "p99_ms": 14311.0,
+  "over_budget": 3197
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "amount_cents_bigint_not_null",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "all_rows_consistent",
+   "ok": true,
+   "detail": "0 mismatching rows"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "insert_sets_amount_cents",
+   "ok": true,
+   "detail": "1234"
+  },
+  {
+   "name": "update_amount_refreshes_cents",
+   "ok": true,
+   "detail": "5555"
+  },
+  {
+   "name": "qty_update_keeps_cents",
+   "ok": true,
+   "detail": "27978"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+SET
+DO
+ALTER TABLE
+DO
+psql:/migration/H5_null_backfill_then_enforce_1794036102_34834/migration.sql:7: ERROR:  check constraint "orders_customer_nn" of relation "orders" is violated by some row

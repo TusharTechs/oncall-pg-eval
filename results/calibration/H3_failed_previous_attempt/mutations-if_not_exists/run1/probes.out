@@ -1,0 +1,2 @@
+psql:/tickets/H3_failed_previous_attempt/probes.sql:4: NOTICE:  PROBE|duplicate_external_ref_rejected|FAIL|duplicate insert succeeded
+PROBE|valid_insert_ok|PASS|

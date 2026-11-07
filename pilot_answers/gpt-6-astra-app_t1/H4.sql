@@ -1,0 +1,1 @@
+-- STATUS: BLOCKED: CREATE INDEX CONCURRENTLY cannot run inside the mandatory transaction; building the required unique index nonconcurrently blocks application writes for 5–10 seconds, violating the 500 ms limit.

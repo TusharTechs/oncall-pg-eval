@@ -1,0 +1,4 @@
+CHECK|column_exists_not_null_text|PASS|1
+CHECK|default_is_EU|PASS|'EU'::text
+CHECK|all_rows_EU|PASS|0 rows not EU
+CHECK|no_invalid_indexes|PASS|0

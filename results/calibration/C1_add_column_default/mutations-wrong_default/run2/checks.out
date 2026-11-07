@@ -1,0 +1,4 @@
+CHECK|column_exists_not_null_text|FAIL|0
+CHECK|default_is_EU|FAIL|none
+CHECK|all_rows_EU|FAIL|5002424 rows not EU
+CHECK|no_invalid_indexes|PASS|0

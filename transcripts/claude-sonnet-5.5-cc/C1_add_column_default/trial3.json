@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "C1_add_column_default",
+ "trial": 3,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:44+00:00",
+ "prompt_sha256": "cc81c0009b521236d22149c6e4654ddcae09a0b809ded52af58f86fddf93329a",
+ "response_text": "```sql\n-- Constant default => metadata-only ADD COLUMN (no rewrite). The only risk is the\n-- ACCESS EXCLUSIVE lock queueing behind the long analytics transaction and\n-- blocking the app, so try with a tiny lock_timeout and retry until a gap appears.\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..120 LOOP\n    BEGIN\n      SET LOCAL lock_timeout = '100ms';\n      ALTER TABLE orders ADD COLUMN IF NOT EXISTS region text NOT NULL DEFAULT 'EU';\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.2);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not get lock on orders to add region';\nEND\n$$;\n```\n",
+ "extracted_sql": "-- Constant default => metadata-only ADD COLUMN (no rewrite). The only risk is the\n-- ACCESS EXCLUSIVE lock queueing behind the long analytics transaction and\n-- blocking the app, so try with a tiny lock_timeout and retry until a gap appears.\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..120 LOOP\n    BEGIN\n      SET LOCAL lock_timeout = '100ms';\n      ALTER TABLE orders ADD COLUMN IF NOT EXISTS region text NOT NULL DEFAULT 'EU';\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.2);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not get lock on orders to add region';\nEND\n$$;\n",
+ "extract_problem": null
+}

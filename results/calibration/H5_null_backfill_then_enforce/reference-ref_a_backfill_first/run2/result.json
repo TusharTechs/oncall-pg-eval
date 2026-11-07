@@ -1,0 +1,60 @@
+{
+ "ticket": "H5_null_backfill_then_enforce",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 2,
+ "migration_rc": 0,
+ "migration_seconds": 5.78,
+ "latency": {
+  "n": 1598,
+  "expected_n": 1555,
+  "max_ms": 51.1,
+  "p99_ms": 45.7,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "customer_id_attnotnull",
+   "ok": true,
+   "detail": "true"
+  },
+  {
+   "name": "validated_fk_to_customers",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "legacy_rows_repaired",
+   "ok": true,
+   "detail": "0 rows differ from the mapping"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "null_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "unknown_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "update_of_repaired_row_ok",
+   "ok": true,
+   "detail": "17"
+  }
+ ]
+}

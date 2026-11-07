@@ -1,0 +1,11 @@
+CREATE TABLE
+COMMIT
+SET
+CREATE INDEX
+SET
+DO
+BEGIN
+ ?column? 
+----------
+(0 rows)
+

@@ -1,0 +1,50 @@
+{
+ "ticket": "C1_add_column_default",
+ "status": "FAIL",
+ "reasons": [
+  "END_STATE: column_exists_not_null_text (0)",
+  "END_STATE: default_is_EU (none)",
+  "END_STATE: all_rows_EU (5002352 rows not EU)",
+  "PROBE: app_insert_gets_EU (NULL)"
+ ],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 5.32,
+ "latency": {
+  "n": 1489,
+  "expected_n": 1464,
+  "max_ms": 55.8,
+  "p99_ms": 51.0,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "column_exists_not_null_text",
+   "ok": false,
+   "detail": "0"
+  },
+  {
+   "name": "default_is_EU",
+   "ok": false,
+   "detail": "none"
+  },
+  {
+   "name": "all_rows_EU",
+   "ok": false,
+   "detail": "5002352 rows not EU"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_gets_EU",
+   "ok": false,
+   "detail": "NULL"
+  }
+ ]
+}

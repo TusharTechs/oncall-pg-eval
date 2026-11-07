@@ -1,0 +1,3 @@
+CREATE TABLE
+SET
+psql:/migration/H4_single_transaction_unique_1794035875_32958/model.sql:3: ERROR:  canceling statement due to lock timeout

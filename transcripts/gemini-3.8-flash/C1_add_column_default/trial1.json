@@ -1,0 +1,19 @@
+{
+ "model": "gemini-3.8-flash",
+ "openrouter_id": "google/gemini-3.8-flash",
+ "ticket": "C1_add_column_default",
+ "trial": 1,
+ "source": "openrouter-api",
+ "date_utc": "2026-11-07T03:58:26+00:00",
+ "prompt_sha256": "cc81c0009b521236d22149c6e4654ddcae09a0b809ded52af58f86fddf93329a",
+ "request": {},
+ "seconds": 0,
+ "finish_reason": "error",
+ "usage": null,
+ "response_text": "",
+ "extracted_sql": null,
+ "extract_problem": "NO_SQL_BLOCK",
+ "raw_response": {
+  "error": "HTTP 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 32000 tokens, but can only afford 4129. To increase, visit https://openrouter.ai/workspaces/default/keys/33c67775433e5acc596238714c570a63619d380efb0e6341f0db00ff79db4665 and adjust the key's total limit\",\"code\":402,\"metadata\":{\"limit_source\":\"openrouter_credits\",\"remedy_hint\":\"Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.\",\"pr"
+ }
+}

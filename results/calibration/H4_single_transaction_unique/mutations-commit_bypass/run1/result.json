@@ -1,0 +1,42 @@
+{
+ "ticket": "H4_single_transaction_unique",
+ "status": "FAIL",
+ "reasons": [
+  "BYPASS: the script ended the deploy tool's single transaction itself (forbidden by the ticket)"
+ ],
+ "seed": 1,
+ "migration_rc": 0,
+ "migration_seconds": 9.56,
+ "latency": {
+  "n": 2277,
+  "expected_n": 2313,
+  "max_ms": 30.3,
+  "p99_ms": 9.6,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "unique_constraint_on_external_ref",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "duplicate_external_ref_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

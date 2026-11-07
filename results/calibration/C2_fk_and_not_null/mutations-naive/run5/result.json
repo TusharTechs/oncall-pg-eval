@@ -1,0 +1,52 @@
+{
+ "ticket": "C2_fk_and_not_null",
+ "status": "FAIL",
+ "reasons": [
+  "LATENCY: peak app latency 5438.8 ms > 500 ms (1002 txns over budget)"
+ ],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 5.48,
+ "latency": {
+  "n": 1480,
+  "expected_n": 1497,
+  "max_ms": 5438.8,
+  "p99_ms": 5354.1,
+  "over_budget": 1002
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "customer_id_attnotnull",
+   "ok": true,
+   "detail": "true"
+  },
+  {
+   "name": "validated_fk_to_customers",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "null_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "unknown_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

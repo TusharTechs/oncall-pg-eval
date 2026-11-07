@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "C3_unique_constraint",
+ "trial": 1,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:43+00:00",
+ "prompt_sha256": "fe1e7be244321432da7825b893c79d65ef8b083b70422a5ae6e46ca60a7502e1",
+ "response_text": "```sql\nCREATE FUNCTION pg_temp.ddl_retry(stmt text, max_tries int DEFAULT 300)\nRETURNS void LANGUAGE plpgsql\nSET lock_timeout = '30ms'\nAS $$\nBEGIN\n  FOR i IN 1..max_tries LOOP\n    BEGIN\n      EXECUTE stmt;\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not acquire lock for: %', stmt;\nEND\n$$;\n\n-- Build the unique index without blocking writes (lock_timeout is 0 at session level here).\nCREATE UNIQUE INDEX CONCURRENTLY orders_external_ref_key ON public.orders (external_ref);\n\n-- Attach it as a constraint; this needs a brief ACCESS EXCLUSIVE lock, so retry with a tiny timeout.\nSELECT pg_temp.ddl_retry($q$ALTER TABLE public.orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_key$q$);\n```\n",
+ "extracted_sql": "CREATE FUNCTION pg_temp.ddl_retry(stmt text, max_tries int DEFAULT 300)\nRETURNS void LANGUAGE plpgsql\nSET lock_timeout = '30ms'\nAS $$\nBEGIN\n  FOR i IN 1..max_tries LOOP\n    BEGIN\n      EXECUTE stmt;\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not acquire lock for: %', stmt;\nEND\n$$;\n\n-- Build the unique index without blocking writes (lock_timeout is 0 at session level here).\nCREATE UNIQUE INDEX CONCURRENTLY orders_external_ref_key ON public.orders (external_ref);\n\n-- Attach it as a constraint; this needs a brief ACCESS EXCLUSIVE lock, so retry with a tiny timeout.\nSELECT pg_temp.ddl_retry($q$ALTER TABLE public.orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_key$q$);\n",
+ "extract_problem": null
+}

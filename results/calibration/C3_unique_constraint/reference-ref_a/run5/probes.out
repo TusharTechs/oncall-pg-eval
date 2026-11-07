@@ -1,0 +1,2 @@
+psql:/tickets/C3_unique_constraint/probes.sql:4: NOTICE:  PROBE|duplicate_external_ref_rejected|PASS|
+PROBE|valid_insert_ok|PASS|

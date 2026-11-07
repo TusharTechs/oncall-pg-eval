@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5.5-cc",
+ "ticket": "C1_add_column_default",
+ "trial": 2,
+ "source": "Claude Code subagent (model=claude-opus-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:12:01+00:00",
+ "prompt_sha256": "cc81c0009b521236d22149c6e4654ddcae09a0b809ded52af58f86fddf93329a",
+ "response_text": "```sql\n-- Ticket C1: add orders.region text NOT NULL DEFAULT 'EU'\n--\n-- On PG 11+ a non-volatile default is stored as the column's \"missing value\":\n-- no table rewrite, and no NOT NULL verification scan (the missing value is non-NULL).\n-- The only hazard is the brief ACCESS EXCLUSIVE lock: if it queues behind the\n-- long analytics transaction, every app write queues behind *it*. So acquire it\n-- with a short lock_timeout and retry until we land in a gap between analytics\n-- transactions.\n\nSET statement_timeout = 0;\nSET lock_timeout = '50ms';\n\nDO $$\nDECLARE\n  attempts int := 0;\nBEGIN\n  LOOP\n    BEGIN\n      ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';\n      EXIT;\n    EXCEPTION WHEN lock_not_available THEN\n      attempts := attempts + 1;\n      IF attempts >= 120 THEN\n        RAISE;\n      END IF;\n      PERFORM pg_sleep(0.15 + random() * 0.1);\n    END;\n  END LOOP;\nEND\n$$;\n\nRESET lock_timeout;\n```\n",
+ "extracted_sql": "-- Ticket C1: add orders.region text NOT NULL DEFAULT 'EU'\n--\n-- On PG 11+ a non-volatile default is stored as the column's \"missing value\":\n-- no table rewrite, and no NOT NULL verification scan (the missing value is non-NULL).\n-- The only hazard is the brief ACCESS EXCLUSIVE lock: if it queues behind the\n-- long analytics transaction, every app write queues behind *it*. So acquire it\n-- with a short lock_timeout and retry until we land in a gap between analytics\n-- transactions.\n\nSET statement_timeout = 0;\nSET lock_timeout = '50ms';\n\nDO $$\nDECLARE\n  attempts int := 0;\nBEGIN\n  LOOP\n    BEGIN\n      ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';\n      EXIT;\n    EXCEPTION WHEN lock_not_available THEN\n      attempts := attempts + 1;\n      IF attempts >= 120 THEN\n        RAISE;\n      END IF;\n      PERFORM pg_sleep(0.15 + random() * 0.1);\n    END;\n  END LOOP;\nEND\n$$;\n\nRESET lock_timeout;\n",
+ "extract_problem": null
+}

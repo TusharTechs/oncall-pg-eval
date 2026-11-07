@@ -1,0 +1,41 @@
+{
+ "ticket": "H1_volatile_default_uuid",
+ "status": "FAIL",
+ "reasons": [
+  "MIGRATION_ERROR: psql exited 3",
+  "END_STATE: public_id_uuid_not_null (0)",
+  "END_STATE: default_gen_random_uuid (none)",
+  "END_STATE: all_rows_distinct_non_null (nulls=2 dups=0)",
+  "PROBE: app probe statements errored (app broken after migration)",
+  "APP_ERRORS: 9 aborted clients, 9 error lines in pgbench output"
+ ],
+ "seed": 2,
+ "migration_rc": 3,
+ "migration_seconds": 16.22,
+ "latency": {
+  "n": 3013,
+  "expected_n": 3643,
+  "max_ms": 234.7,
+  "p99_ms": 133.6,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "public_id_uuid_not_null",
+   "ok": false,
+   "detail": "0"
+  },
+  {
+   "name": "default_gen_random_uuid",
+   "ok": false,
+   "detail": "none"
+  },
+  {
+   "name": "all_rows_distinct_non_null",
+   "ok": false,
+   "detail": "nulls=2 dups=0"
+  }
+ ],
+ "probes": []
+}

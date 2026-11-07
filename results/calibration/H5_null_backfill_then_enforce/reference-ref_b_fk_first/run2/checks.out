@@ -1,0 +1,4 @@
+CHECK|customer_id_attnotnull|PASS|true
+CHECK|validated_fk_to_customers|PASS|1
+CHECK|legacy_rows_repaired|PASS|0 rows differ from the mapping
+CHECK|no_invalid_indexes|PASS|0

@@ -1,0 +1,19 @@
+{
+ "model": "gpt-6-astra",
+ "openrouter_id": "openai/gpt-6-astra",
+ "ticket": "H2_int_overflow_emergency",
+ "trial": 1,
+ "source": "openrouter-api",
+ "date_utc": "2026-11-07T03:58:25+00:00",
+ "prompt_sha256": "0e75a98d085864d75ecce787efd366db67d297dfad4cd339a56b90a7a9dbbebb",
+ "request": {},
+ "seconds": 0,
+ "finish_reason": "error",
+ "usage": null,
+ "response_text": "",
+ "extracted_sql": null,
+ "extract_problem": "NO_SQL_BLOCK",
+ "raw_response": {
+  "error": "HTTP 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 32000 tokens, but can only afford 309. To increase, visit https://openrouter.ai/workspaces/default/keys/33c67775433e5acc596238714c570a63619d380efb0e6341f0db00ff79db4665 and adjust the key's total limit\",\"code\":402,\"metadata\":{\"limit_source\":\"openrouter_credits\",\"remedy_hint\":\"Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.\",\"pro"
+ }
+}

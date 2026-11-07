@@ -1,0 +1,1 @@
+-- STATUS: BLOCKED: single-transaction mode prohibits CREATE INDEX CONCURRENTLY, and building the unique index non-concurrently acquires a SHARE lock on orders for 5-10 seconds, blocking application writes and violating the 500 ms SLA.

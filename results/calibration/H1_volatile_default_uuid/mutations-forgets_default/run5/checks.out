@@ -1,0 +1,3 @@
+CHECK|public_id_uuid_not_null|FAIL|0
+CHECK|default_gen_random_uuid|FAIL|none
+CHECK|all_rows_distinct_non_null|FAIL|nulls=1 dups=0

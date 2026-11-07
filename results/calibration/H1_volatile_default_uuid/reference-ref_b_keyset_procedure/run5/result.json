@@ -1,0 +1,40 @@
+{
+ "ticket": "H1_volatile_default_uuid",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 27.98,
+ "latency": {
+  "n": 5882,
+  "expected_n": 5995,
+  "max_ms": 148.1,
+  "p99_ms": 37.2,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "public_id_uuid_not_null",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "default_gen_random_uuid",
+   "ok": true,
+   "detail": "gen_random_uuid()"
+  },
+  {
+   "name": "all_rows_distinct_non_null",
+   "ok": true,
+   "detail": "nulls=0 dups=0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_gets_public_id",
+   "ok": true,
+   "detail": "9b0ae0f5-216f-47db-8570-81bb7e842752"
+  }
+ ]
+}

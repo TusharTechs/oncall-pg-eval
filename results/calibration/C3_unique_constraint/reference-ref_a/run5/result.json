@@ -1,0 +1,40 @@
+{
+ "ticket": "C3_unique_constraint",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 5,
+ "migration_rc": 0,
+ "migration_seconds": 5.21,
+ "latency": {
+  "n": 1477,
+  "expected_n": 1442,
+  "max_ms": 17.4,
+  "p99_ms": 5.2,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "unique_constraint_on_external_ref",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "duplicate_external_ref_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5.5-cc",
+ "ticket": "H4_single_transaction_unique",
+ "trial": 3,
+ "source": "Claude Code subagent (model=claude-opus-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:43+00:00",
+ "prompt_sha256": "f0569b319b81664a5d040e83a4e352c12fd7e8223010ba416abf95a67ce88781",
+ "response_text": "```sql\n-- STATUS: BLOCKED: inside the mandatory single transaction CREATE INDEX CONCURRENTLY is impossible, and any in-transaction unique index build holds a SHARE (or ACCESS EXCLUSIVE) lock on orders blocking app writes for the 5-10s build until commit (>500 ms); no dblink to escape the wrapper.\n```\n",
+ "extracted_sql": "-- STATUS: BLOCKED: inside the mandatory single transaction CREATE INDEX CONCURRENTLY is impossible, and any in-transaction unique index build holds a SHARE (or ACCESS EXCLUSIVE) lock on orders blocking app writes for the 5-10s build until commit (>500 ms); no dblink to escape the wrapper.\n",
+ "extract_problem": null
+}

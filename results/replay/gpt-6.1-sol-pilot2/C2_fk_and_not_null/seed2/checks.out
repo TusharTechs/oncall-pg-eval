@@ -1,0 +1,3 @@
+CHECK|customer_id_attnotnull|PASS|true
+CHECK|validated_fk_to_customers|PASS|1
+CHECK|no_invalid_indexes|PASS|0

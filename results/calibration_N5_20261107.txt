@@ -1,0 +1,54 @@
+[grade] gpt-6.1-sol-app H5_null_backfill_then_enforce trial1: PASS peak=11.3ms 
+[grade] gpt-6.1-sol-app H5_null_backfill_then_enforce trial2: PASS peak=28.0ms 
+[grade] gpt-6.1-sol-app H5_null_backfill_then_enforce trial3: PASS peak=21.0ms 
+[grade] nemotron-3-ultra-free H5_null_backfill_then_enforce trial2: NO_VALID_OUTPUT (EMPTY_REPLY)
+=== N=5 calibration start Sat Nov  7 10:51:41 IST 2026
+C1_add_column_default    reference  ref_a_do_retry                     5/5 pass   peaks_ms=[ 57.1 55.4 160.4 57.5 160.7 ] OK | -
+C1_add_column_default    reference  ref_b_nowait_poll                  5/5 pass   peaks_ms=[ 10.3 17.7 8.4 8.6 15.8 ] OK | -
+C1_add_column_default    mutations  duty_cycle_hot_retry               2/5 pass   peaks_ms=[ 496.7 521.6 519.9 680.2 404.7 ] ** MISMATCH ** | -
+C1_add_column_default    mutations  naive                              0/5 pass   peaks_ms=[ 9612.8 5551.8 10364.7 6403.9 5107.8 ] OK | LATENCY: peak app latency 5107.8 ms > 500 ms (953 txns over budget)
+C1_add_column_default    mutations  sleep_then_naive                   0/5 pass   peaks_ms=[ 5889.0 1515.6 8477.9 1547.8 1534.2 ] OK | LATENCY: peak app latency 1534.2 ms > 500 ms (236 txns over budget)
+C1_add_column_default    mutations  wrong_default                      0/5 pass   peaks_ms=[ 58.4 55.2 61.9 67.6 55.8 ] OK | END_STATE: column_exists_not_null_text (0)
+C2_fk_and_not_null       reference  ref_a                              5/5 pass   peaks_ms=[ 60.3 59.0 55.8 58.5 54.8 ] OK | -
+C2_fk_and_not_null       reference  ref_b_combined                     5/5 pass   peaks_ms=[ 34.1 35.1 130.0 34.8 36.8 ] OK | -
+C2_fk_and_not_null       mutations  check_only_no_attnotnull           0/5 pass   peaks_ms=[ 122.2 57.1 56.0 60.4 57.8 ] OK | END_STATE: customer_id_attnotnull (false)
+C2_fk_and_not_null       mutations  naive                              0/5 pass   peaks_ms=[ 9437.0 5824.3 10639.6 6698.7 5438.8 ] OK | LATENCY: peak app latency 5438.8 ms > 500 ms (1002 txns over budget)
+C3_unique_constraint     reference  ref_a                              5/5 pass   peaks_ms=[ 28.0 46.2 58.3 20.0 17.4 ] OK | -
+C3_unique_constraint     reference  ref_b_nowait                       5/5 pass   peaks_ms=[ 57.4 109.2 91.7 112.3 70.4 ] OK | -
+C3_unique_constraint     mutations  declines_doable_ticket             0/5 pass   peaks_ms=[ - - - - - ] OK | DECLINED: answered BLOCKED but the ticket is doable (a reference solut
+C3_unique_constraint     mutations  index_only_no_constraint           0/5 pass   peaks_ms=[ 12.3 26.3 23.6 123.8 94.8 ] OK | END_STATE: unique_constraint_on_external_ref (0)
+C3_unique_constraint     mutations  naive                              0/5 pass   peaks_ms=[ 14707.7 10166.6 13668.8 9757.7 8212.2 ] OK | LATENCY: peak app latency 8212.2 ms > 500 ms (1534 txns over budget)
+C3_unique_constraint     mutations  nonconcurrent_index_with_retry     0/5 pass   peaks_ms=[ 3185.7 3184.7 3093.7 7579.9 5258.9 ] OK | LATENCY: peak app latency 5258.9 ms > 500 ms (989 txns over budget)
+C4_backfill_derived_column reference  ref_a                              4/5 pass   peaks_ms=[ 1347.0 460.2 218.1 252.3 180.2 ] ** MISMATCH ** | -
+C4_backfill_derived_column reference  ref_b_procedure                    3/5 pass   peaks_ms=[ 681.1 230.3 306.7 2033.1 447.7 ] ** MISMATCH ** | -
+C4_backfill_derived_column mutations  default_999_no_trigger             0/5 pass   peaks_ms=[ 2463.9 332.0 1729.5 2151.9 1107.0 ] OK | END_STATE: all_rows_consistent (2 mismatching rows)
+C4_backfill_derived_column mutations  insert_only_trigger                0/5 pass   peaks_ms=[ 160.4 98.3 160.0 101.8 239.8 ] OK | END_STATE: all_rows_consistent (1 mismatching rows)
+C4_backfill_derived_column mutations  naive_generated_column             0/5 pass   peaks_ms=[ 19623.5 14724.2 21517.6 13633.4 14624.1 ] OK | LATENCY: peak app latency 14624.1 ms > 500 ms (3197 txns over budget)
+C4_backfill_derived_column mutations  single_transaction_backfill        0/5 pass   peaks_ms=[ 13056.0 13657.6 12196.5 12190.7 11148.8 ] OK | LATENCY: peak app latency 11148.8 ms > 500 ms (2116 txns over budget)
+H1_volatile_default_uuid reference  ref_a                              5/5 pass   peaks_ms=[ 156.2 250.8 256.5 103.0 188.9 ] OK | -
+H1_volatile_default_uuid reference  ref_b_keyset_procedure             5/5 pass   peaks_ms=[ 235.5 154.5 195.6 219.5 148.1 ] OK | -
+H1_volatile_default_uuid mutations  forgets_default                    0/5 pass   peaks_ms=[ 119.2 234.7 198.0 127.7 106.7 ] OK | MIGRATION_ERROR: psql exited 3
+H1_volatile_default_uuid mutations  naive_volatile_default             0/5 pass   peaks_ms=[ 3857.8 3970.2 3864.0 3786.4 3740.4 ] OK | LATENCY: peak app latency 3740.4 ms > 500 ms (622 txns over budget)
+H1_volatile_default_uuid mutations  not_valid_check_before_backfill    0/5 pass   peaks_ms=[ 38.5 35.1 39.9 34.3 32.9 ] OK | APP_ERRORS: 9 aborted clients, 9 error lines in pgbench output
+H1_volatile_default_uuid mutations  nullable_with_volatile_default     0/5 pass   peaks_ms=[ 3739.2 3844.4 3933.9 3704.8 3825.2 ] OK | LATENCY: peak app latency 3825.2 ms > 500 ms (677 txns over budget)
+H2_int_overflow_emergency reference  ref_a_negative_ids                 5/5 pass   peaks_ms=[ 9.6 9.8 10.8 10.7 10.8 ] OK | -
+H2_int_overflow_emergency reference  ref_b_descending                   5/5 pass   peaks_ms=[ 11.0 9.0 8.6 10.9 10.9 ] OK | -
+H2_int_overflow_emergency reference  ref_c_cycle                        5/5 pass   peaks_ms=[ 11.6 8.9 10.0 10.9 12.3 ] OK | -
+H2_int_overflow_emergency mutations  alter_type_bigint                  0/5 pass   peaks_ms=[ 546.5 566.5 578.9 532.0 523.2 ] OK | LATENCY: peak app latency 523.2 ms > 500 ms (4 txns over budget)
+H2_int_overflow_emergency mutations  do_nothing                         0/5 pass   peaks_ms=[ 8.3 10.0 7.9 8.0 9.4 ] OK | END_STATE: headroom_1e9 (type=integer next=2147483648 inc=1 cycle=f us
+H2_int_overflow_emergency mutations  sequence_as_bigint_only            0/5 pass   peaks_ms=[ 106.0 552.2 46.3 31.3 27.7 ] OK | END_STATE: headroom_1e9 (type=integer next=2147491470 inc=1 cycle=f us
+H3_failed_previous_attempt reference  ref_a                              5/5 pass   peaks_ms=[ 26.9 54.2 11.7 8.5 66.9 ] OK | -
+H3_failed_previous_attempt reference  ref_b_new_name                     5/5 pass   peaks_ms=[ 31.0 15.0 20.7 12.6 21.7 ] OK | -
+H3_failed_previous_attempt mutations  c3_reference_unchanged             0/5 pass   peaks_ms=[ 3.4 8.0 4.9 3.4 4.1 ] OK | MIGRATION_ERROR: psql exited 3
+H3_failed_previous_attempt mutations  if_not_exists                      0/5 pass   peaks_ms=[ 58.1 52.9 54.1 52.4 54.8 ] OK | MIGRATION_ERROR: psql exited 3
+H3_failed_previous_attempt mutations  keeps_statement_timeout            0/5 pass   peaks_ms=[ 3.5 4.0 4.1 5.9 3.8 ] OK | MIGRATION_ERROR: psql exited 3
+H4_single_transaction_unique reference  ref_blocked                        5/5 pass   peaks_ms=[ - - - - - ] OK | -
+H4_single_transaction_unique mutations  c3_reference_in_transaction        0/5 pass   peaks_ms=[ 3.7 2.5 4.4 11.9 6.5 ] OK | MIGRATION_ERROR: psql exited 3
+H4_single_transaction_unique mutations  commit_bypass                      0/5 pass   peaks_ms=[ 30.3 8.5 5.0 41.4 5.9 ] OK | BYPASS: the script ended the deploy tool's single transaction itself (
+H4_single_transaction_unique mutations  plain_build_with_retry             0/5 pass   peaks_ms=[ 52.1 54.1 49.0 47.3 52.2 ] OK | MIGRATION_ERROR: psql exited 3
+H5_null_backfill_then_enforce reference  ref_a_backfill_first               5/5 pass   peaks_ms=[ 54.0 51.1 52.3 52.1 52.0 ] OK | -
+H5_null_backfill_then_enforce reference  ref_b_fk_first                     5/5 pass   peaks_ms=[ 32.7 35.8 35.0 31.5 31.5 ] OK | -
+H5_null_backfill_then_enforce mutations  c2_reference_without_repair        0/5 pass   peaks_ms=[ 55.4 52.4 52.0 52.0 52.8 ] OK | MIGRATION_ERROR: psql exited 3
+H5_null_backfill_then_enforce mutations  check_before_repair                0/5 pass   peaks_ms=[ 51.6 52.2 54.9 54.6 53.7 ] OK | APP_ERRORS: 4 aborted clients, 4 error lines in pgbench output
+=== N=5 calibration end Sat Nov  7 12:54:28 IST 2026
+[grade] nemotron-3-ultra-free H5_null_backfill_then_enforce trial3: FAIL peak=8983.6ms LATENCY: peak app latency 8983.6 ms > 500 ms (1714 txns over budget)

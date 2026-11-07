@@ -1,0 +1,2 @@
+SET
+psql:/migration/H3_failed_previous_attempt_1794035559_29494/migration.sql:5: ERROR:  relation "orders_external_ref_key" already exists

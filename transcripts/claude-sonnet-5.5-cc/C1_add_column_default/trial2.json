@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "C1_add_column_default",
+ "trial": 2,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:43+00:00",
+ "prompt_sha256": "cc81c0009b521236d22149c6e4654ddcae09a0b809ded52af58f86fddf93329a",
+ "response_text": "```sql\n-- Constant default: metadata-only in PG 11+, no table rewrite.\n-- The ALTER needs ACCESS EXCLUSIVE briefly, so never queue behind the analytics\n-- transaction: use a short lock_timeout and retry until we catch a gap.\nSET lock_timeout = '50ms';\n\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..150 LOOP\n    BEGIN\n      ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';\n      EXIT;\n    EXCEPTION WHEN lock_not_available THEN\n      IF i = 150 THEN\n        RAISE;\n      END IF;\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\nEND\n$$;\n\nRESET lock_timeout;\n```\n",
+ "extracted_sql": "-- Constant default: metadata-only in PG 11+, no table rewrite.\n-- The ALTER needs ACCESS EXCLUSIVE briefly, so never queue behind the analytics\n-- transaction: use a short lock_timeout and retry until we catch a gap.\nSET lock_timeout = '50ms';\n\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..150 LOOP\n    BEGIN\n      ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';\n      EXIT;\n    EXCEPTION WHEN lock_not_available THEN\n      IF i = 150 THEN\n        RAISE;\n      END IF;\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\nEND\n$$;\n\nRESET lock_timeout;\n",
+ "extract_problem": null
+}

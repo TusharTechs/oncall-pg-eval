@@ -1,0 +1,11 @@
+{
+ "model": "gpt-6.1-sol-app",
+ "ticket": "C1_add_column_default",
+ "trial": 2,
+ "source": "ChatGPT app paste (GPT-6.1 Sol, high effort, tools off), fresh chat per trial",
+ "date_utc": "2026-11-07T05:10:44+00:00",
+ "prompt_sha256": "cc81c0009b521236d22149c6e4654ddcae09a0b809ded52af58f86fddf93329a",
+ "response_text": "```sql\nDO $migration$\nBEGIN\n    -- Limit how long a queued lock request can hold up new app transactions.\n    PERFORM pg_catalog.set_config('lock_timeout', '25ms', true);\n\n    LOOP\n        BEGIN\n            LOCK TABLE orders IN ACCESS EXCLUSIVE MODE;\n            EXIT;\n        EXCEPTION\n            WHEN lock_not_available THEN\n                NULL;\n        END;\n\n        -- Give queued transactions time to run before trying again.\n        PERFORM pg_catalog.pg_sleep(0.100);\n    END LOOP;\n\n    -- PostgreSQL supplies the constant default to existing rows without a rewrite.\n    ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';\nEND;\n$migration$;\n```\n",
+ "extracted_sql": "DO $migration$\nBEGIN\n    -- Limit how long a queued lock request can hold up new app transactions.\n    PERFORM pg_catalog.set_config('lock_timeout', '25ms', true);\n\n    LOOP\n        BEGIN\n            LOCK TABLE orders IN ACCESS EXCLUSIVE MODE;\n            EXIT;\n        EXCEPTION\n            WHEN lock_not_available THEN\n                NULL;\n        END;\n\n        -- Give queued transactions time to run before trying again.\n        PERFORM pg_catalog.pg_sleep(0.100);\n    END LOOP;\n\n    -- PostgreSQL supplies the constant default to existing rows without a rewrite.\n    ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';\nEND;\n$migration$;\n",
+ "extract_problem": null
+}

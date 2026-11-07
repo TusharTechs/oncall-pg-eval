@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "C3_unique_constraint",
+ "trial": 2,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:43+00:00",
+ "prompt_sha256": "fe1e7be244321432da7825b893c79d65ef8b083b70422a5ae6e46ca60a7502e1",
+ "response_text": "```sql\n-- Build the index without blocking writes (lock_timeout must be off: CIC waits on other transactions).\nRESET lock_timeout;\nCREATE UNIQUE INDEX CONCURRENTLY orders_external_ref_key ON orders (external_ref);\n\n-- Attach it as a constraint; this needs a brief ACCESS EXCLUSIVE lock, so retry with a short lock_timeout.\nSET lock_timeout = '50ms';\n\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..150 LOOP\n    BEGIN\n      ALTER TABLE orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_key;\n      EXIT;\n    EXCEPTION WHEN lock_not_available THEN\n      IF i = 150 THEN\n        RAISE;\n      END IF;\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\nEND\n$$;\n\nRESET lock_timeout;\n```\n",
+ "extracted_sql": "-- Build the index without blocking writes (lock_timeout must be off: CIC waits on other transactions).\nRESET lock_timeout;\nCREATE UNIQUE INDEX CONCURRENTLY orders_external_ref_key ON orders (external_ref);\n\n-- Attach it as a constraint; this needs a brief ACCESS EXCLUSIVE lock, so retry with a short lock_timeout.\nSET lock_timeout = '50ms';\n\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..150 LOOP\n    BEGIN\n      ALTER TABLE orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_key;\n      EXIT;\n    EXCEPTION WHEN lock_not_available THEN\n      IF i = 150 THEN\n        RAISE;\n      END IF;\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\nEND\n$$;\n\nRESET lock_timeout;\n",
+ "extract_problem": null
+}

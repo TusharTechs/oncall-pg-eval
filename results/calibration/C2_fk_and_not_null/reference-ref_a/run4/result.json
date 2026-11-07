@@ -1,0 +1,50 @@
+{
+ "ticket": "C2_fk_and_not_null",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 4,
+ "migration_rc": 0,
+ "migration_seconds": 6.75,
+ "latency": {
+  "n": 1698,
+  "expected_n": 1750,
+  "max_ms": 58.5,
+  "p99_ms": 50.4,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "customer_id_attnotnull",
+   "ok": true,
+   "detail": "true"
+  },
+  {
+   "name": "validated_fk_to_customers",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "null_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "unknown_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

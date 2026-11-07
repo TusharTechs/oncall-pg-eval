@@ -1,0 +1,8 @@
+[grade] gpt-6.1-sol-app C2_fk_and_not_null trial1: PASS peak=10.5ms 
+[grade] gpt-6.1-sol-app C2_fk_and_not_null trial2: PASS peak=25.9ms 
+[grade] gpt-6.1-sol-app C2_fk_and_not_null trial3: PASS peak=11.7ms 
+H5_null_backfill_then_enforce reference  ref_a_backfill_first               1/1 pass   peaks_ms=[ 66.7 ] OK | -
+H5_null_backfill_then_enforce reference  ref_b_fk_first                     1/1 pass   peaks_ms=[ 44.0 ] OK | -
+H5_null_backfill_then_enforce mutations  c2_reference_without_repair        0/1 pass   peaks_ms=[ 145.9 ] OK | MIGRATION_ERROR: psql exited 3
+H5_null_backfill_then_enforce mutations  check_before_repair                0/1 pass   peaks_ms=[ 56.4 ] OK | APP_ERRORS: 6 aborted clients, 6 error lines in pgbench output
+H5_null_backfill_then_enforce mutations  one_big_update                     1/1 pass   peaks_ms=[ 306.8 ] ** MISMATCH ** | -

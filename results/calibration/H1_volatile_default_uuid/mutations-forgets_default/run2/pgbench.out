@@ -1,0 +1,32 @@
+pgbench (17.11 (Debian 17.11-1.pgdg13+2))
+pgbench: error: client 0 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003219, 133791, app-4eb04033-91a1-46e7-9303-2015a5a4bb93, 1, new, 9.99, 2026-11-07 06:19:49.958947+00, null).
+pgbench: error: client 4 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003220, 89302, app-f4b99c26-a30b-4be8-b3f5-0b938816f98d, 1, new, 9.99, 2026-11-07 06:19:49.966578+00, null).
+pgbench: error: client 6 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003221, 183066, app-61da1a3d-2ca7-4acd-82f5-1cead0124850, 1, new, 9.99, 2026-11-07 06:19:49.967642+00, null).
+pgbench: error: client 5 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003222, 116179, app-145df744-f427-4b67-a64d-20208269c1a4, 1, new, 9.99, 2026-11-07 06:19:49.968653+00, null).
+pgbench: error: client 7 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003223, 148690, app-e7f4294f-01aa-4225-a635-71fe89cd6612, 1, new, 9.99, 2026-11-07 06:19:49.971603+00, null).
+pgbench: error: client 1 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003224, 73063, app-6c2cf36b-b298-4f4d-8b0b-babdc6327279, 1, new, 9.99, 2026-11-07 06:19:49.980108+00, null).
+pgbench: error: client 2 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003225, 24411, app-6b78bc93-7c62-4018-9f0c-9a4f3bb3fa5c, 1, new, 9.99, 2026-11-07 06:19:50.012186+00, null).
+pgbench: error: client 3 script 0 aborted in command 4 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"
+DETAIL:  Failing row contains (5003226, 6381, app-d9200d34-b62e-49d4-bdb0-3acc30fb0442, 1, new, 9.99, 2026-11-07 06:19:50.014071+00, null).
+transaction type: /tickets/_common/default.pgbench
+scaling factor: 1
+query mode: simple
+number of clients: 8
+number of threads: 4
+maximum number of tries: 1
+duration: 210 s
+number of transactions actually processed: 3218
+number of failed transactions: 0 (0.000%)
+latency average = 7.172 ms
+latency stddev = 21.903 ms
+rate limit schedule lag: avg 2.971 (max 212.641) ms
+initial connection time = 12.995 ms
+tps = 192.503848 (without initial connection time)
+pgbench: error: Run was aborted; the above results are incomplete.

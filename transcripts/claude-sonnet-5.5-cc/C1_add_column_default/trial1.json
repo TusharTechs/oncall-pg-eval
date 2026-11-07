@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "C1_add_column_default",
+ "trial": 1,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:43+00:00",
+ "prompt_sha256": "cc81c0009b521236d22149c6e4654ddcae09a0b809ded52af58f86fddf93329a",
+ "response_text": "```sql\n-- Retry helper: ACCESS EXCLUSIVE DDL must never queue behind the long analytics\n-- transaction (it would block all app traffic), so use a tiny lock_timeout and retry.\nCREATE FUNCTION pg_temp.ddl_retry(stmt text, max_tries int DEFAULT 300)\nRETURNS void LANGUAGE plpgsql\nSET lock_timeout = '30ms'\nAS $$\nBEGIN\n  FOR i IN 1..max_tries LOOP\n    BEGIN\n      EXECUTE stmt;\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not acquire lock for: %', stmt;\nEND\n$$;\n\n-- Constant default on PG11+ is metadata-only (no table rewrite).\nSELECT pg_temp.ddl_retry($q$ALTER TABLE public.orders ADD COLUMN region text NOT NULL DEFAULT 'EU'$q$);\n```\n",
+ "extracted_sql": "-- Retry helper: ACCESS EXCLUSIVE DDL must never queue behind the long analytics\n-- transaction (it would block all app traffic), so use a tiny lock_timeout and retry.\nCREATE FUNCTION pg_temp.ddl_retry(stmt text, max_tries int DEFAULT 300)\nRETURNS void LANGUAGE plpgsql\nSET lock_timeout = '30ms'\nAS $$\nBEGIN\n  FOR i IN 1..max_tries LOOP\n    BEGIN\n      EXECUTE stmt;\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.1);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not acquire lock for: %', stmt;\nEND\n$$;\n\n-- Constant default on PG11+ is metadata-only (no table rewrite).\nSELECT pg_temp.ddl_retry($q$ALTER TABLE public.orders ADD COLUMN region text NOT NULL DEFAULT 'EU'$q$);\n",
+ "extract_problem": null
+}

@@ -1,0 +1,11 @@
+{
+ "model": "gpt-6-astra-app-pilot",
+ "ticket": "H2_int_overflow_emergency",
+ "trial": 1,
+ "source": "ChatGPT app paste (GPT-6 Astra, high), pilot only",
+ "date_utc": "2026-11-06T18:54:09+00:00",
+ "prompt_sha256": "0e75a98d085864d75ecce787efd366db67d297dfad4cd339a56b90a7a9dbbebb",
+ "response_text": "```sql\n-- Existing ids are positive. Use the unused negative integer range,\n-- providing 2,147,483,648 inserts before reaching zero.\n-- This locks the sequence, not events, so analytics reads do not block it.\nALTER SEQUENCE events_id_seq\n    MINVALUE -2147483648\n    RESTART WITH -2147483648;\n```\n",
+ "extracted_sql": "-- Existing ids are positive. Use the unused negative integer range,\n-- providing 2,147,483,648 inserts before reaching zero.\n-- This locks the sequence, not events, so analytics reads do not block it.\nALTER SEQUENCE events_id_seq\n    MINVALUE -2147483648\n    RESTART WITH -2147483648;\n",
+ "extract_problem": null
+}

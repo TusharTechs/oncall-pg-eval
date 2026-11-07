@@ -1,0 +1,24 @@
+pgbench (17.11 (Debian 17.11-1.pgdg13+2))
+pgbench: error: client 4 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 2 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 7 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 5 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 6 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 3 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 1 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+pgbench: error: client 0 script 0 aborted in command 3 query 0: ERROR:  nextval: reached maximum value of sequence "events_id_seq" (2147483647)
+transaction type: /tickets/H2_int_overflow_emergency/app.pgbench
+scaling factor: 1
+query mode: simple
+number of clients: 8
+number of threads: 4
+maximum number of tries: 1
+duration: 120 s
+number of transactions actually processed: 5000
+number of failed transactions: 0 (0.000%)
+latency average = 1.024 ms
+latency stddev = 0.573 ms
+rate limit schedule lag: avg 0.293 (max 7.922) ms
+initial connection time = 12.174 ms
+tps = 198.417824 (without initial connection time)
+pgbench: error: Run was aborted; the above results are incomplete.

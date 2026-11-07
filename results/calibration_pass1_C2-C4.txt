@@ -1,0 +1,32 @@
+C2_fk_and_not_null       reference  ref_a                              1/1 pass   peaks_ms=[ 60.6 ] OK | -
+C2_fk_and_not_null       reference  ref_b_combined                     1/1 pass   peaks_ms=[ 40.6 ] OK | -
+C2_fk_and_not_null       mutations  check_only_no_attnotnull           0/1 pass   peaks_ms=[ 58.8 ] OK | END_STATE: customer_id_attnotnull (false)
+C2_fk_and_not_null       mutations  duty_cycle_hot_retry               1/1 pass   peaks_ms=[ 425.5 ] ** MISMATCH ** | -
+C2_fk_and_not_null       mutations  fk_validated_inline                1/1 pass   peaks_ms=[ 409.6 ] ** MISMATCH ** | -
+C2_fk_and_not_null       mutations  naive                              0/1 pass   peaks_ms=[ 9703.3 ] OK | LATENCY: peak app latency 9703.3 ms > 500 ms (1840 txns over budget)
+C3_unique_constraint     reference  ref_a                              1/1 pass   peaks_ms=[ 8.8 ] OK | -
+C3_unique_constraint     reference  ref_b_nowait                       1/1 pass   peaks_ms=[ 35.2 ] OK | -
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json;r=json.load(open('results/calibration/C3_unique_constraint/mutations-index_only_no_constraint/run1/result.json'));print(r['status'])
+                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/calibration/C3_unique_constraint/mutations-index_only_no_constraint/run1/result.json'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json;r=json.load(open('results/calibration/C3_unique_constraint/mutations-index_only_no_constraint/run1/result.json'));print(r['latency'].get('max_ms','?'))
+                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/calibration/C3_unique_constraint/mutations-index_only_no_constraint/run1/result.json'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json;r=json.load(open('results/calibration/C3_unique_constraint/mutations-index_only_no_constraint/run1/result.json'));print((r['reasons'] or ['-'])[0][:70])
+                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/calibration/C3_unique_constraint/mutations-index_only_no_constraint/run1/result.json'
+C3_unique_constraint     mutations  index_only_no_constraint           0/1 pass   peaks_ms=[  ] OK | 
+C3_unique_constraint     mutations  naive                              0/1 pass   peaks_ms=[ 11904.7 ] OK | LATENCY: peak app latency 11904.7 ms > 500 ms (2281 txns over budget)
+C3_unique_constraint     mutations  nonconcurrent_index_with_retry     0/1 pass   peaks_ms=[ 2548.1 ] OK | TIMEOUT: migration exceeded 60s
+C4_backfill_derived_column reference  ref_a                              1/1 pass   peaks_ms=[ 165.8 ] OK | -
+C4_backfill_derived_column reference  ref_b_procedure                    1/1 pass   peaks_ms=[ 95.4 ] OK | -
+C4_backfill_derived_column mutations  default_999_no_trigger             0/1 pass   peaks_ms=[ 951.2 ] OK | END_STATE: all_rows_consistent (2 mismatching rows)
+C4_backfill_derived_column mutations  insert_only_trigger                0/1 pass   peaks_ms=[ 149.1 ] OK | END_STATE: all_rows_consistent (1 mismatching rows)
+C4_backfill_derived_column mutations  naive_generated_column             0/1 pass   peaks_ms=[ 22484.9 ] OK | LATENCY: peak app latency 22484.9 ms > 500 ms (4629 txns over budget)
+C4_backfill_derived_column mutations  single_transaction_backfill        0/1 pass   peaks_ms=[ 16865.0 ] OK | TIMEOUT: migration exceeded 150s

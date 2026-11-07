@@ -1,0 +1,3 @@
+[grade] gpt-6.1-sol-app C1_add_column_default trial1: PASS peak=23.3ms 
+[grade] gpt-6.1-sol-app C1_add_column_default trial2: PASS peak=36.6ms 
+[grade] gpt-6.1-sol-app C1_add_column_default trial3: PASS peak=63.1ms 

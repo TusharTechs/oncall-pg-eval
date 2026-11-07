@@ -1,0 +1,1 @@
+{"ticket":"C3_unique_constraint","status":"FAIL","reasons":["DECLINED: answered BLOCKED but the ticket is doable (a reference solution passes)"],"declined":true,"declined_text":"-- STATUS: BLOCKED: cannot add a unique constraint without blocking writes.","seed":2}

@@ -1,0 +1,12 @@
+{
+ "model": "gpt-6.1-sol-app",
+ "ticket": "H4_single_transaction_unique",
+ "trial": 1,
+ "source": "ChatGPT app paste (GPT-6.1 Sol, high), final prompt (sha256 matches the shipped prompt)",
+ "date_utc": "2026-11-06T18:49:37+00:00",
+ "prompt_sha256": "f0569b319b81664a5d040e83a4e352c12fd7e8223010ba416abf95a67ce88781",
+ "response_text": "```sql\n-- STATUS: BLOCKED: The mandatory single transaction prohibits CREATE INDEX CONCURRENTLY; building the required unique index normally blocks application writes for 5\u201310 seconds, exceeding the 500 ms limit.\n```\n",
+ "extracted_sql": "-- STATUS: BLOCKED: The mandatory single transaction prohibits CREATE INDEX CONCURRENTLY; building the required unique index normally blocks application writes for 5\u201310 seconds, exceeding the 500 ms limit.\n",
+ "extract_problem": null,
+ "note": "same final prompt (sha256 verified); originally filed under gpt-6.1-sol-app-pilot"
+}

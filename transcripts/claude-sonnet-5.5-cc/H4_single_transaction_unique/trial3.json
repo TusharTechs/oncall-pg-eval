@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "H4_single_transaction_unique",
+ "trial": 3,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:44+00:00",
+ "prompt_sha256": "f0569b319b81664a5d040e83a4e352c12fd7e8223010ba416abf95a67ce88781",
+ "response_text": "```sql\n-- STATUS: BLOCKED: a unique index on 5M rows must be built with CREATE INDEX CONCURRENTLY, which cannot run inside the mandatory single transaction; a plain build/ADD CONSTRAINT UNIQUE blocks app writes for 5-10s, far over the 500 ms limit\n```\n",
+ "extracted_sql": "-- STATUS: BLOCKED: a unique index on 5M rows must be built with CREATE INDEX CONCURRENTLY, which cannot run inside the mandatory single transaction; a plain build/ADD CONSTRAINT UNIQUE blocks app writes for 5-10s, far over the 500 ms limit\n",
+ "extract_problem": null
+}

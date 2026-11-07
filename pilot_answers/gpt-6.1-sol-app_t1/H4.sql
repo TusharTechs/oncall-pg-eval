@@ -1,0 +1,1 @@
+-- STATUS: BLOCKED: The mandatory single transaction prohibits CREATE INDEX CONCURRENTLY; building the required unique index normally blocks application writes for 5–10 seconds, exceeding the 500 ms limit.

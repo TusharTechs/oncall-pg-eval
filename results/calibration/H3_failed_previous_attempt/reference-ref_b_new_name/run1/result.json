@@ -1,0 +1,40 @@
+{
+ "ticket": "H3_failed_previous_attempt",
+ "status": "PASS",
+ "reasons": [],
+ "seed": 1,
+ "migration_rc": 0,
+ "migration_seconds": 9.81,
+ "latency": {
+  "n": 2364,
+  "expected_n": 2361,
+  "max_ms": 31.0,
+  "p99_ms": 11.0,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "unique_constraint_on_external_ref",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "duplicate_external_ref_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

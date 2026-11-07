@@ -1,0 +1,7 @@
+[grade] claude-opus-5.5-cc H5_null_backfill_then_enforce trial1: PASS peak=73.5ms 
+[grade] claude-opus-5.5-cc H5_null_backfill_then_enforce trial2: PASS peak=56.5ms 
+[grade] claude-opus-5.5-cc H5_null_backfill_then_enforce trial3: PASS peak=105.9ms 
+[grade] claude-sonnet-5.5-cc H5_null_backfill_then_enforce trial1: PASS peak=57.3ms 
+[grade] claude-sonnet-5.5-cc H5_null_backfill_then_enforce trial2: PASS peak=54.9ms 
+[grade] claude-sonnet-5.5-cc H5_null_backfill_then_enforce trial3: PASS peak=53.8ms 
+[grade] nemotron-3-ultra-free H5_null_backfill_then_enforce trial1: FAIL peak=5884.6ms LATENCY: peak app latency 5884.6 ms > 500 ms (1127 txns over budget)

@@ -1,0 +1,15 @@
+SET
+CREATE FUNCTION
+ retry 
+-------
+ 
+(1 row)
+
+DO
+ retry 
+-------
+ 
+(1 row)
+
+SET
+psql:/migration/H1_volatile_default_uuid_1794032514_21429/migration.sql:26: ERROR:  check constraint "orders_public_id_nn" of relation "orders" is violated by some row

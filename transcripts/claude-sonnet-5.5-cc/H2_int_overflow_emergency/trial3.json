@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "H2_int_overflow_emergency",
+ "trial": 3,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:44+00:00",
+ "prompt_sha256": "0e75a98d085864d75ecce787efd366db67d297dfad4cd339a56b90a7a9dbbebb",
+ "response_text": "```sql\n-- Emergency fix, no table rewrite and no table lock: move the identity sequence into the\n-- unused NEGATIVE half of the int range. Existing ids (just below 2147483647) never change,\n-- and the sequence now has ~2.1 billion values (-2147483648 .. -1 and beyond) before it can\n-- possibly collide with them, far more than the 1,000,000,000 required.\n-- The column can be widened to bigint later in a maintenance window.\nALTER SEQUENCE events_id_seq MINVALUE -2147483648 RESTART WITH -2147483648;\n```\n",
+ "extracted_sql": "-- Emergency fix, no table rewrite and no table lock: move the identity sequence into the\n-- unused NEGATIVE half of the int range. Existing ids (just below 2147483647) never change,\n-- and the sequence now has ~2.1 billion values (-2147483648 .. -1 and beyond) before it can\n-- possibly collide with them, far more than the 1,000,000,000 required.\n-- The column can be widened to bigint later in a maintenance window.\nALTER SEQUENCE events_id_seq MINVALUE -2147483648 RESTART WITH -2147483648;\n",
+ "extract_problem": null
+}

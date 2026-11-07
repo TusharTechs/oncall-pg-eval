@@ -1,0 +1,47 @@
+{
+ "ticket": "C1_add_column_default",
+ "status": "FAIL",
+ "reasons": [
+  "LATENCY: peak app latency 1547.8 ms > 500 ms (214 txns over budget)"
+ ],
+ "seed": 4,
+ "migration_rc": 0,
+ "migration_seconds": 14.58,
+ "latency": {
+  "n": 3307,
+  "expected_n": 3316,
+  "max_ms": 1547.8,
+  "p99_ms": 1423.9,
+  "over_budget": 214
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "column_exists_not_null_text",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "default_is_EU",
+   "ok": true,
+   "detail": "'EU'::text"
+  },
+  {
+   "name": "all_rows_EU",
+   "ok": true,
+   "detail": "0 rows not EU"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "app_insert_gets_EU",
+   "ok": true,
+   "detail": "EU"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+[12:22:36] reset db
+   setval   
+------------
+ 2147478647
+(1 row)
+
+[12:22:40] migration start
+[12:22:46] migration end rc=0

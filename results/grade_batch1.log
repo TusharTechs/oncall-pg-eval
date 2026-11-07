@@ -1,0 +1,2 @@
+[grade] claude-haiku-5.5 C1_add_column_default trial1: FAIL peak=6.3ms MIGRATION_ERROR: psql exited 1
+[grade] claude-haiku-5.5 C2_fk_and_not_null trial1: FAIL peak=8.6ms MIGRATION_ERROR: psql exited 1

@@ -1,0 +1,17 @@
+SET
+CREATE FUNCTION
+CREATE FUNCTION
+ retry 
+-------
+ 
+(1 row)
+
+ retry 
+-------
+ 
+(1 row)
+
+psql:/migration/C4_backfill_derived_column_1794030311_14098/migration.sql:25: ERROR:  canceling statement due to lock timeout
+CONTEXT:  while locking tuple (32731,50) in relation "orders"
+SQL statement "UPDATE orders SET amount_cents = (amount * 100)::bigint WHERE id > lo AND id <= lo + 20000 AND amount_cents IS NULL"
+PL/pgSQL function inline_code_block line 6 at SQL statement

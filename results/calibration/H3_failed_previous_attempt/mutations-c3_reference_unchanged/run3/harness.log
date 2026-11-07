@@ -1,0 +1,5 @@
+[12:42:29] reset db
+psql:<stdin>:5: ERROR:  could not create unique index "orders_external_ref_key"
+DETAIL:  Key (external_ref)=(ext-1) is duplicated.
+[12:42:33] migration start
+[12:42:33] migration end rc=3

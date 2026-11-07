@@ -1,0 +1,11 @@
+{
+ "model": "gpt-6-astra-app-pilot",
+ "ticket": "H4_single_transaction_unique",
+ "trial": 1,
+ "source": "ChatGPT app paste (GPT-6 Astra, high), pilot only",
+ "date_utc": "2026-11-06T18:54:09+00:00",
+ "prompt_sha256": "f0569b319b81664a5d040e83a4e352c12fd7e8223010ba416abf95a67ce88781",
+ "response_text": "```sql\n-- STATUS: BLOCKED: CREATE INDEX CONCURRENTLY cannot run inside the mandatory transaction; building the required unique index nonconcurrently blocks application writes for 5\u201310 seconds, violating the 500 ms limit.\n```\n",
+ "extracted_sql": "-- STATUS: BLOCKED: CREATE INDEX CONCURRENTLY cannot run inside the mandatory transaction; building the required unique index nonconcurrently blocks application writes for 5\u201310 seconds, violating the 500 ms limit.\n",
+ "extract_problem": null
+}

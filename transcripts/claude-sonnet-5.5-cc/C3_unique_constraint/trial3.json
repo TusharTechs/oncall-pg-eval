@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5.5-cc",
+ "ticket": "C3_unique_constraint",
+ "trial": 3,
+ "source": "Claude Code subagent (model=claude-sonnet-5.5, tools limited to Read prompt/Write answer, audited)",
+ "date_utc": "2026-11-07T04:10:44+00:00",
+ "prompt_sha256": "fe1e7be244321432da7825b893c79d65ef8b083b70422a5ae6e46ca60a7502e1",
+ "response_text": "```sql\n-- 1. Build the unique index without blocking writes (autocommit, outside any transaction).\nCREATE UNIQUE INDEX CONCURRENTLY orders_external_ref_uq ON orders (external_ref);\n\n-- 2. Attach it as a constraint. This needs a brief ACCESS EXCLUSIVE lock, so use a\n--    short lock_timeout and retry rather than queueing behind the analytics transaction.\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..200 LOOP\n    BEGIN\n      SET LOCAL lock_timeout = '100ms';\n      ALTER TABLE orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_uq;\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.15);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not acquire lock on orders to attach unique constraint';\nEND\n$$;\n```\n",
+ "extracted_sql": "-- 1. Build the unique index without blocking writes (autocommit, outside any transaction).\nCREATE UNIQUE INDEX CONCURRENTLY orders_external_ref_uq ON orders (external_ref);\n\n-- 2. Attach it as a constraint. This needs a brief ACCESS EXCLUSIVE lock, so use a\n--    short lock_timeout and retry rather than queueing behind the analytics transaction.\nDO $$\nDECLARE\n  i int;\nBEGIN\n  FOR i IN 1..200 LOOP\n    BEGIN\n      SET LOCAL lock_timeout = '100ms';\n      ALTER TABLE orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_uq;\n      RETURN;\n    EXCEPTION WHEN lock_not_available THEN\n      PERFORM pg_sleep(0.15);\n    END;\n  END LOOP;\n  RAISE EXCEPTION 'could not acquire lock on orders to attach unique constraint';\nEND\n$$;\n",
+ "extract_problem": null
+}

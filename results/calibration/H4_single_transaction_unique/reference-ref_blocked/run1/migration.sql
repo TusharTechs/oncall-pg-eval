@@ -1,0 +1,1 @@
+-- STATUS: BLOCKED: inside one transaction the 5-10 s unique index build must hold a lock that blocks app writes (CONCURRENTLY is not allowed in a transaction block), which breaks the 500 ms budget.

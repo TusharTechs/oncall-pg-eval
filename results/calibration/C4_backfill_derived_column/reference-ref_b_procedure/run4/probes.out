@@ -1,0 +1,3 @@
+PROBE|insert_sets_amount_cents|PASS|1234
+PROBE|update_amount_refreshes_cents|PASS|5555
+PROBE|qty_update_keeps_cents|PASS|27978

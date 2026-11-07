@@ -1,0 +1,32 @@
+pgbench (17.11 (Debian 17.11-1.pgdg13+2))
+pgbench: error: client 1 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (996224, null, ext-996224, 6, new, 225.24, 2026-10-26 15:02:31.263143+00).
+pgbench: error: client 0 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (4226672, null, ext-4226672, 3, new, 173.72, 2026-09-19 05:41:43.263143+00).
+pgbench: error: client 5 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (4234448, null, ext-4234448, 2, new, 449.48, 2026-09-19 03:32:07.263143+00).
+pgbench: error: client 7 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (3970080, null, ext-3970080, 3, new, 81.80, 2026-09-22 04:58:15.263143+00).
+pgbench: error: client 2 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (2654480, null, ext-2654480, 4, new, 481.80, 2026-10-07 10:24:55.263143+00).
+pgbench: error: client 6 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (2439344, null, ext-2439344, 6, new, 345.44, 2026-10-09 22:10:31.263143+00).
+pgbench: error: client 4 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (4302528, null, ext-4302528, 7, new, 29.28, 2026-09-18 08:37:27.263143+00).
+pgbench: error: client 3 script 0 aborted in command 3 query 0: ERROR:  new row for relation "orders" violates check constraint "orders_customer_nn"
+DETAIL:  Failing row contains (4063648, null, ext-4063648, 2, new, 149.48, 2026-09-21 02:58:47.263143+00).
+transaction type: /tickets/_common/default.pgbench
+scaling factor: 1
+query mode: simple
+number of clients: 8
+number of threads: 4
+maximum number of tries: 1
+duration: 150 s
+number of transactions actually processed: 1505
+number of failed transactions: 0 (0.000%)
+latency average = 4.662 ms
+latency stddev = 10.785 ms
+rate limit schedule lag: avg 1.102 (max 44.964) ms
+initial connection time = 11.430 ms
+tps = 187.288616 (without initial connection time)
+pgbench: error: Run was aborted; the above results are incomplete.

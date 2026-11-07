@@ -1,0 +1,20 @@
+[grade] nemotron-3-ultra-free C1_add_column_default trial2: FAIL peak=5546.5ms LATENCY: peak app latency 5546.5 ms > 500 ms (1045 txns over budget)
+[grade] nemotron-3-ultra-free C2_fk_and_not_null trial1: FAIL peak=9787.5ms LATENCY: peak app latency 9787.5 ms > 500 ms (1853 txns over budget)
+[grade] nemotron-3-ultra-free C2_fk_and_not_null trial2: FAIL peak=5549.3ms LATENCY: peak app latency 5549.3 ms > 500 ms (1072 txns over budget)
+[grade] nemotron-3-ultra-free C3_unique_constraint trial2: PASS peak=14.2ms 
+[grade] nemotron-3-ultra-free H3_failed_previous_attempt trial2: FAIL peak=207.2ms MIGRATION_ERROR: psql exited 3
+[grade] nemotron-3-ultra-free H4_single_transaction_unique trial1: PASS peak=Nonems 
+[grade] nemotron-3-ultra-free H4_single_transaction_unique trial2: PASS peak=Nonems 
+=== Sol pilot-2 script replay on hardened harness
+
+C1 seed1 FAIL 510.0 ms LATENCY: peak app latency 510.0 ms > 500 ms (1 txns over budget)
+
+C1 seed2 FAIL 592.3 ms LATENCY: peak app latency 592.3 ms > 500 ms (7 txns over budget)
+
+C1 seed3 PASS 410.3 ms 
+
+C2 seed1 FAIL 608.0 ms LATENCY: peak app latency 608.0 ms > 500 ms (29 txns over budget)
+
+C2 seed2 FAIL 876.4 ms LATENCY: peak app latency 876.4 ms > 500 ms (181 txns over budget)
+
+C2 seed3 PASS 471.6 ms 

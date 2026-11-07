@@ -1,0 +1,9 @@
+SET
+psql:/migration/H3_failed_previous_attempt_1794035599_29910/migration.sql:3: NOTICE:  relation "orders_external_ref_key" already exists, skipping
+CREATE INDEX
+SET
+psql:/migration/H3_failed_previous_attempt_1794035599_29910/migration.sql:7: ERROR:  index "orders_external_ref_key" is not valid
+LINE 1: ALTER TABLE orders ADD CONSTRAINT orders_external_ref_key UN...
+                               ^
+QUERY:  ALTER TABLE orders ADD CONSTRAINT orders_external_ref_key UNIQUE USING INDEX orders_external_ref_key
+CONTEXT:  PL/pgSQL function inline_code_block line 2 at SQL statement

@@ -1,0 +1,61 @@
+{
+ "ticket": "H5_null_backfill_then_enforce",
+ "status": "FAIL",
+ "reasons": [
+  "MIGRATION_ERROR: psql exited 3",
+  "END_STATE: customer_id_attnotnull (false)",
+  "END_STATE: legacy_rows_repaired (300000 rows differ from the mapping)",
+  "PROBE: app probe statements errored (app broken after migration)",
+  "APP_ERRORS: 9 aborted clients, 9 error lines in pgbench output"
+ ],
+ "seed": 4,
+ "migration_rc": 3,
+ "migration_seconds": 6.64,
+ "latency": {
+  "n": 1411,
+  "expected_n": 1728,
+  "max_ms": 52.0,
+  "p99_ms": 49.8,
+  "over_budget": 0
+ },
+ "budget_ms": 500.0,
+ "checks": [
+  {
+   "name": "customer_id_attnotnull",
+   "ok": false,
+   "detail": "false"
+  },
+  {
+   "name": "validated_fk_to_customers",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "legacy_rows_repaired",
+   "ok": false,
+   "detail": "300000 rows differ from the mapping"
+  },
+  {
+   "name": "no_invalid_indexes",
+   "ok": true,
+   "detail": "0"
+  }
+ ],
+ "probes": [
+  {
+   "name": "null_customer_rejected",
+   "ok": true,
+   "detail": "rejected by check"
+  },
+  {
+   "name": "unknown_customer_rejected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "valid_insert_ok",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}
