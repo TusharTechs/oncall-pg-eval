@@ -1,0 +1,73 @@
+# Models under test (OpenRouter IDs verified against https://openrouter.ai/api/v1/models on 2026-11-07).
+# Same prompt and grader for every model. reasoning_effort is passed as OpenRouter's unified
+# `reasoning.effort`; provider defaults are used for temperature (reasoning models fix it).
+
+[[model]]
+name = "claude-opus-5.5"
+openrouter_id = "anthropic/claude-opus-5.5"
+reasoning_effort = "high"
+
+[[model]]
+name = "claude-sonnet-5.5"
+openrouter_id = "anthropic/claude-sonnet-5.5"
+reasoning_effort = "high"
+
+[[model]]
+name = "claude-haiku-5.5"
+openrouter_id = "anthropic/claude-haiku-5.5"
+reasoning_effort = "high"
+
+[[model]]
+name = "gpt-6.1-sol"
+openrouter_id = "openai/gpt-6.1-sol"
+reasoning_effort = "high"
+
+[[model]]
+name = "gpt-6-astra"
+openrouter_id = "openai/gpt-6-astra"
+reasoning_effort = "high"
+
+[[model]]
+name = "gemini-4-argon"
+openrouter_id = "google/gemini-4-argon"
+reasoning_effort = "high"
+
+[[model]]
+name = "gemini-3.8-flash"
+openrouter_id = "google/gemini-3.8-flash"
+reasoning_effort = "high"
+
+[[model]]
+name = "grok-4.7"
+openrouter_id = "x-ai/grok-4.7"
+reasoning_effort = "high"
+
+[[model]]
+name = "deepseek-v4-pro"
+openrouter_id = "deepseek/deepseek-v4-pro-0813"
+reasoning_effort = "high"
+
+# ---- low-cost / free models (budget run, 2026-11-07) ----
+[[model]]
+name = "gpt-oss-120b"
+openrouter_id = "openai/gpt-oss-120b"
+reasoning_effort = "high"
+
+[[model]]
+name = "deepseek-v4-flash"
+openrouter_id = "deepseek/deepseek-v4-flash"
+reasoning_effort = "high"
+
+[[model]]
+name = "qwen3.7-flash"
+openrouter_id = "qwen/qwen3.7-flash"
+reasoning_effort = "high"
+
+[[model]]
+name = "nemotron-3-ultra-free"
+openrouter_id = "nvidia/nemotron-3-ultra-550b-a55b:free"
+reasoning_effort = "high"
+
+[[model]]
+name = "gemma-4-31b-free"
+openrouter_id = "google/gemma-4-31b-it:free"
