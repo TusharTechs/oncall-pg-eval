@@ -1,0 +1,6 @@
+# The eval itself needs NO third-party Python packages: evalpg/ and harness/ use the standard library only.
+# Runtime requirements (not pip-installable):
+#   - Python >= 3.11 (tomllib)
+#   - Docker with Compose v2 (image postgres:17.11, pinned by digest in docker-compose.yml)
+#   - bash, make, openssl
+# Optional: the video pipeline has its own requirements in video/requirements-video.txt

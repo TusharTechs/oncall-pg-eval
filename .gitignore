@@ -1,0 +1,12 @@
+.env
+.runtime/
+runs/
+results/dev/
+video/.venv/
+video/models/
+video/build/
+video/node_modules/
+video/voice_samples/
+__pycache__/
+*.pyc
+.DS_Store
