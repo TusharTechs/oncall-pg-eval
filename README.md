@@ -225,6 +225,11 @@ make regrade            # re-grade EVERY shipped model answer against the live D
 - Expected result: the same PASS/FAIL table as [`results/summary.md`](results/summary.md). Latency numbers vary with your hardware; the verdicts shouldn't (see the calibration margins above).
 - To try a single ticket and script in about 1 minute: `./harness/run_trial.sh tickets/C1_add_column_default tickets/C1_add_column_default/reference/ref_a_do_retry.sql /tmp/out 1`.
 - To stop everything: `make down`.
+- **Troubleshooting:**
+  - *`db` container exits with `/run/secrets/superuser_pw: No such file`*: Docker can't see the clone's folder. Clone under your home directory, or add the folder in Docker Desktop → Settings → Resources → File sharing.
+  - *Trials report `HARNESS_ERROR`*: make sure nothing else is using the `oncallpg` Compose project. The harness takes a lock and runs one trial at a time.
+  - *Peak latencies much higher than ours*: give Docker 4 CPUs and 6 GB, and close heavy apps. Verdicts have wide margins, but `make calibrate N=1` tells you whether your machine is in spec.
+- **Verified from a fresh `git clone`** on Nov 7, 2026: `make up` took 9 s; C1 reference → PASS (171 ms peak); C1 naive mutation → FAIL (9.7 s stall).
 
 **Generating new model answers (optional):**
 ```bash
