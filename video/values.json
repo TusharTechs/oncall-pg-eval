@@ -1,0 +1,15 @@
+{
+ "HOOK_STALL": "over 6 seconds",
+ "DEMO_STALL": "6.4 seconds in this run, and up to 10.4 across five runs",
+ "RESULTS_SENTENCE_1": "Across the eight scored tickets, Claude Opus passed 23 of 24 runs and Sonnet 23 of 24, and GPT six point one Sol passed all 13 runs it was given.",
+ "RESULTS_SENTENCE_2": "The free open model, Nemotron, passed 11 of 24, with checkout freezes of up to 11 seconds.",
+ "_chart_naive_run": "/Users/techtush/Projects/micro1-eval-hackathon/oncall-pg-eval/results/calibration/C1_add_column_default/mutations-naive/run4",
+ "_chart_safe_run": "/Users/techtush/Projects/micro1-eval-hackathon/oncall-pg-eval/results/calibration/C1_add_column_default/reference-ref_a_do_retry/run3",
+ "_naive_peaks": [
+  9612.8,
+  5551.8,
+  10364.7,
+  6403.9,
+  5107.8
+ ]
+}

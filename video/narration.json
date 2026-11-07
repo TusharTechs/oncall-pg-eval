@@ -1,0 +1,120 @@
+{
+  "voice": "Aman",
+  "rate": 172,
+  "gap_s": 0.32,
+  "scene_tail_s": 0.7,
+  "scenes": [
+    {
+      "id": "hook",
+      "sentences": [
+        "This database migration was correct.",
+        "It added one column.",
+        "And for {HOOK_STALL}, every checkout write stopped."
+      ]
+    },
+    {
+      "id": "title",
+      "sentences": [
+        "This is OnCall P G: an evaluation that asks whether frontier models can change a live production database without taking it down."
+      ]
+    },
+    {
+      "id": "why",
+      "sentences": [
+        "I'm a customer engineer at a checkout and payments company.",
+        "When a platform change goes wrong, I'm the one hearing from merchants: stuck checkouts, abandoned carts.",
+        "Database migrations are a classic way it happens.",
+        "GoCardless, a payments company, lost its API for about fifteen seconds this way.",
+        "A fast ALTER TABLE queued behind a long read, and every request queued behind it.",
+        "Today, AI assistants write a lot of these migrations.",
+        "So I asked: do frontier models know how to do this safely?",
+        "And when they actually do it, does production survive?"
+      ]
+    },
+    {
+      "id": "saturated",
+      "sentences": [
+        "First, I built the obvious eval: predict exactly what Postgres, Linux and Kubernetes will do.",
+        "Every answer key came from running the real system.",
+        "Six frontier models scored between eighty-seven and eighty-nine, out of eighty-nine.",
+        "Knowing is saturated. The real question is whether that knowledge survives contact with a live system."
+      ]
+    },
+    {
+      "id": "how",
+      "sentences": [
+        "So OnCall P G hands the model an on-call ticket, and a real Postgres seventeen grades the answer.",
+        "The orders table has five million rows. An app writes two hundred transactions a second, and an analytics job keeps long reads open.",
+        "The model's script runs in its own container, as a non-superuser.",
+        "It passes only if the schema ends up right, and fresh app writes still behave,",
+        "no app transaction waits longer than five hundred milliseconds, and no app connection errors.",
+        "There is no L L M judge, and no hand-written answer key. Postgres decides."
+      ]
+    },
+    {
+      "id": "demo",
+      "sentences": [
+        "Here is the difference.",
+        "The textbook one-line ALTER TABLE is perfectly valid S Q L.",
+        "It queues behind the analytics read, and every checkout write queues behind it.",
+        "The app stalls: {DEMO_STALL}.",
+        "The safe version waits fifty milliseconds at a time, slips in between reads, and the app barely notices."
+      ]
+    },
+    {
+      "id": "trust",
+      "sentences": [
+        "Can you trust the grader?",
+        "Every ticket ships with independent reference solutions that must pass five runs out of five.",
+        "And deliberately wrong scripts, including attempts to game it, that must fail, five times out of five.",
+        "The database even caught me: two of my own reference answers were wrong, and one of my checks would have failed a valid answer.",
+        "And one of my own tickets, a five-million-row backfill, failed its correct answers three times in ten from disk noise, so it no longer counts toward any score.",
+        "And when an agentic I D E quietly read the answer key off my disk, a similarity check exposed it.",
+        "Every final answer now comes from a source with no file access."
+      ]
+    },
+    {
+      "id": "results",
+      "sentences": [
+        "{RESULTS_SENTENCE_1}",
+        "{RESULTS_SENTENCE_2}",
+        "Frontier models know the playbook. But one ticket breaks even them."
+      ]
+    },
+    {
+      "id": "h1",
+      "sentences": [
+        "Ticket H one: give every order a public I D.",
+        "Opus, Sonnet and Haiku each, in at least one run, added a NOT NULL check marked NOT VALID, before backfilling the data.",
+        "NOT VALID means existing rows aren't checked. But Postgres still enforces it on every row that gets updated.",
+        "So the app's ordinary quantity update hit an old row, and all eight app connections died.",
+        "The schema was perfect. Latency was fine. Only the crashed app gave it away.",
+        "A passing Opus run made the same early check, but added a trigger that fills the value on update.",
+        "That one trigger is the expertise."
+      ]
+    },
+    {
+      "id": "nuance",
+      "sentences": [
+        "Two honest footnotes.",
+        "When the ticket framed the job as repairing data first, every frontier model avoided this trap.",
+        "And in my pilot, GPT six point one Sol's retry loop sat in the lock queue ninety-five percent of the time, and starved the app.",
+        "Changing only its pause fixed it. On the final prompt, Sol chose a safer loop, so I report it as a hazard, not a headline."
+      ]
+    },
+    {
+      "id": "takeaway",
+      "sentences": [
+        "So here's the lesson.",
+        "Frontier models have memorized the safe-migration playbook.",
+        "What they miss is what the playbook doesn't spell out: a constraint that's not valid, yet still fires; a retry loop that's polite to the database, but not to the app.",
+        "You only find those by running the plan against a live system.",
+        "Everything you've seen reproduces with three commands."
+      ]
+    }
+  ],
+  "engine": "kokoro",
+  "kokoro_voice": "af_heart",
+  "speed": 1.0,
+  "lang": "en-us"
+}

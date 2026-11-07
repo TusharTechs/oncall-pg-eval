@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>OnCall-PG video</title>
+<style>
+:root{
+  --bg:#121212; --surface:#1a1a19; --surface2:#232321; --line:#33332f; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c84;
+  --s0:#3987e5; --s1:#d95926; --good:#0ca30c; --crit:#e05252; --warn:#fab219;
+  --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:1920px;height:1080px;background:var(--bg);color:var(--ink);overflow:hidden;
+  font-family:-apple-system,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.scene{position:absolute;inset:0;opacity:0;padding:110px 140px 190px}
+.chapter{position:absolute;top:44px;left:140px;font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.chapter b{color:var(--s0);font-weight:700;margin-right:12px}
+#progress{position:absolute;top:0;left:0;height:5px;background:var(--s0);opacity:.85}
+#brand{position:absolute;top:40px;right:140px;font-size:22px;color:var(--ink3);letter-spacing:.06em}
+#brand b{color:var(--ink)}
+#cap{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);max-width:1500px;text-align:center;
+  font-size:36px;line-height:1.32;font-weight:500;color:#fff;background:rgba(0,0,0,.62);padding:12px 26px;border-radius:12px}
+#cap:empty{display:none}
+h1{font-size:96px;line-height:1.02;margin:0 0 26px;font-weight:800;letter-spacing:-.02em}
+h2{font-size:64px;line-height:1.08;margin:0 0 30px;font-weight:750;letter-spacing:-.015em}
+.big{font-size:54px;line-height:1.2;font-weight:650}
+.muted{color:var(--ink2)} .dim{color:var(--ink3)}
+.mono{font-family:var(--mono)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px 36px}
+.chip{display:inline-block;border-radius:999px;padding:8px 20px;font-size:26px;font-weight:650;margin:6px 10px 6px 0;border:1px solid var(--line);background:var(--surface2)}
+.pass{color:#7fe07f} .fail{color:#ff8a80}
+.tag-pass{background:rgba(12,163,12,.16);border-color:rgba(12,163,12,.55);color:#9be89b}
+.tag-fail{background:rgba(224,82,82,.16);border-color:rgba(224,82,82,.6);color:#ffb0aa}
+.row{display:flex;gap:40px;align-items:stretch}
+.col{flex:1}
+code.blk{display:block;white-space:pre;font-family:var(--mono);font-size:23px;line-height:1.5;color:#dcdbd5;overflow:hidden}
+.hl-bad{background:rgba(224,82,82,.22);border-left:5px solid var(--crit);margin-left:-17px;padding-left:12px;display:block}
+.hl-good{background:rgba(12,163,12,.18);border-left:5px solid var(--good);margin-left:-17px;padding-left:12px;display:block}
+.term{white-space:pre;background:#0b0b0b;border:1px solid var(--line);border-radius:16px;padding:22px 28px;font-family:var(--mono);font-size:24px;line-height:1.55;color:#d8d7d0}
+.term .p{color:var(--s0)} .term .ok{color:#7fe07f} .term .bad{color:#ff8a80} .term .d{color:var(--ink3)}
+table.res{border-collapse:separate;border-spacing:0 6px;width:100%;font-size:27px}
+table.res th{color:var(--ink3);font-weight:600;text-align:center;padding:6px 10px;font-size:22px;letter-spacing:.05em}
+table.res th.l,table.res td.l{text-align:left}
+table.res td{background:var(--surface);padding:12px 12px;text-align:center;font-variant-numeric:tabular-nums}
+table.res td:first-child{border-radius:12px 0 0 12px} table.res td:last-child{border-radius:0 12px 12px 0}
+.cell-pass{color:#9be89b} .cell-part{color:#fab219} .cell-fail{color:#ffb0aa} .cell-na{color:#5c5b55}
+.hi{outline:3px solid var(--warn);outline-offset:-3px}
+.box{position:absolute;border:2px solid var(--line);background:var(--surface);border-radius:20px;padding:22px 26px;font-size:28px;line-height:1.3}
+.box .t{font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.arrow{position:absolute;height:4px;background:var(--ink3);transform-origin:left center}
+.arrow:after{content:"";position:absolute;right:-4px;top:-9px;border-left:18px solid var(--ink3);border-top:11px solid transparent;border-bottom:11px solid transparent}
+.check{font-size:32px;line-height:1.6} .check span{color:var(--good);font-weight:800;margin-right:14px}
+.grid9{display:grid;grid-template-columns:420px 1fr 1fr;gap:8px;font-size:26px}
+.grid9 div{background:var(--surface);border-radius:10px;padding:9px 16px;white-space:nowrap}
+.grid9 .h{background:transparent;color:var(--ink3);font-size:21px;letter-spacing:.08em;text-transform:uppercase}
+.bar{height:44px;border-radius:0 8px 8px 0;background:var(--s0)}
+.qbox{display:inline-flex;align-items:center;justify-content:center;width:120px;height:72px;border-radius:12px;font-size:22px;font-weight:700;margin-right:12px}
+</style></head>
+<body>
+<div id="progress"></div>
+<div id="brand"><b>OnCall-PG</b> · micro1 Eval Hackathon</div>
+
+<!-- 1 HOOK -->
+<div class="scene" id="sc-hook" style="padding-top:150px">
+  <div data-s="0" class="mono" style="font-size:34px;color:var(--ink2);margin-bottom:30px">ALTER TABLE orders ADD COLUMN region text NOT NULL DEFAULT 'EU';</div>
+  <h1 data-s="0">This migration was correct.</h1>
+  <div data-s="1" class="big muted">It added one column.</div>
+  <div data-s="2" style="margin-top:40px"><svg id="hookChart" width="1640" height="420"></svg></div>
+</div>
+
+<!-- 2 TITLE -->
+<div class="scene" id="sc-title" style="display:flex;flex-direction:column;justify-content:center;padding-top:60px">
+  <div data-t="0" class="dim" style="font-size:30px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px">An eval for the micro1 Eval Hackathon</div>
+  <h1 data-t="0.15" style="font-size:150px">OnCall-PG</h1>
+  <div data-t="0.5" class="big" style="max-width:1450px">Can frontier models change a <span style="color:var(--s0)">live production database</span> without taking it down?</div>
+  <div data-t="1.4" style="margin-top:46px">
+    <span class="chip">PostgreSQL 17, real traffic</span><span class="chip">9 on-call tickets</span><span class="chip">the database is the grader</span><span class="chip">no LLM judge</span>
+  </div>
+</div>
+
+<!-- 3 WHY -->
+<div class="scene" id="sc-why">
+  <div class="chapter"><b>01</b>Why this matters</div>
+  <div class="row" style="margin-top:20px">
+    <div class="col">
+      <div data-s="0" class="card" style="margin-bottom:26px"><div class="dim" style="font-size:22px;letter-spacing:.1em;text-transform:uppercase">The author</div>
+        <div style="font-size:40px;font-weight:700;margin-top:8px">Customer Engineer</div><div class="muted" style="font-size:30px">checkout &amp; payments platform</div></div>
+      <div data-s="1" class="card" style="margin-bottom:26px;font-size:32px;line-height:1.4">A platform change goes wrong → <b>merchants feel it first</b>: stuck checkouts, abandoned carts.</div>
+      <div data-s="3" class="card" style="font-size:29px;line-height:1.42;border-color:rgba(217,89,38,.6)">
+        <div class="dim" style="font-size:21px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Public postmortem · GoCardless (payments)</div>
+        ≈15 s API outage during a planned schema change. A fast <span class="mono">ALTER TABLE</span> queued behind a long read; every request queued behind it.
+        <div class="dim" style="font-size:20px;margin-top:10px">gocardless.com/blog/zero-downtime-postgres-migrations-the-hard-parts</div></div>
+    </div>
+    <div class="col" style="position:relative">
+      <div data-s="2" class="dim" style="font-size:24px;letter-spacing:.1em;text-transform:uppercase;margin:8px 0 22px">How one migration freezes a table</div>
+      <div data-s="2" style="font-size:28px;margin-bottom:18px"><span class="qbox" style="background:rgba(57,135,229,.25);border:2px solid var(--s0)">READ</span>analytics read holds a lock (10 s)</div>
+      <div data-s="2" style="font-size:28px;margin-bottom:18px"><span class="qbox" style="background:rgba(250,178,25,.2);border:2px solid var(--warn)">ALTER</span>migration waits for an exclusive lock</div>
+      <div data-s="2" style="font-size:28px;margin-bottom:12px"><span class="qbox" style="background:rgba(224,82,82,.2);border:2px solid var(--crit)">WRITE</span>…every app write queues behind it</div>
+      <div id="queueRow" data-s="2" style="margin:6px 0 34px 132px;height:48px"></div>
+      <div data-s="5" class="card" style="font-size:34px;line-height:1.35;border-color:rgba(57,135,229,.7)">AI assistants now write these migrations.<br><b>Do they know how?</b> <span style="color:var(--s0)">Does production survive?</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4 SATURATED -->
+<div class="scene" id="sc-saturated">
+  <div class="chapter"><b>02</b>Pilot 1: knowing</div>
+  <h2 data-s="0">89 expert questions, answer keys produced by running the real systems</h2>
+  <div data-s="0" class="muted" style="font-size:28px;margin:-10px 0 34px">Linux ACLs &amp; sticky dirs · PostgreSQL 17 lock modes / rewrites · Kubernetes NetworkPolicy reachability</div>
+  <div id="satBars" data-s="2"></div>
+  <div data-s="3" style="position:absolute;right:150px;bottom:230px;transform:rotate(-6deg)">
+    <div style="border:6px solid var(--warn);color:var(--warn);font-size:64px;font-weight:900;padding:10px 34px;border-radius:16px;letter-spacing:.06em">KNOWING: SATURATED</div></div>
+</div>
+
+<!-- 5 HOW -->
+<div class="scene" id="sc-how">
+  <div class="chapter"><b>03</b>How a task works</div>
+  <div data-s="0" class="box" style="left:140px;top:170px;width:400px"><div class="t">Frontier model</div>reads an on-call ticket<br>writes <span class="mono">migration.sql</span></div>
+  <div data-s="2" class="box" style="left:140px;top:420px;width:400px;border-color:var(--s0)"><div class="t">Migrator container</div>runs the script as a<br><b>non-superuser</b>, isolated</div>
+  <div data-s="0" class="box" style="left:720px;top:290px;width:470px;height:230px;border-color:var(--ink2)"><div class="t">PostgreSQL 17 · the grader</div><div style="font-size:34px;font-weight:700">orders: 5,000,000 rows</div><div class="muted">customers: 200,000 rows</div></div>
+  <div data-s="1" class="box" style="left:1360px;top:190px;width:420px;border-color:var(--s1)"><div class="t">App (pgbench)</div><b>200 tx/s</b> checkout writes<br>UPDATE + INSERT</div>
+  <div data-s="1" class="box" style="left:1360px;top:440px;width:420px"><div class="t">Analytics job</div>6–12 s read transactions,<br>one already open</div>
+  <div data-s="2" class="arrow" style="left:545px;top:520px;width:170px;transform:rotate(-16deg)"></div>
+  <div data-s="0" class="arrow" style="left:545px;top:250px;width:0px;display:none"></div>
+  <div data-s="1" class="arrow" style="left:1200px;top:360px;width:150px;transform:rotate(180deg) translate(-150px,0)"></div>
+  <div data-s="3" class="card check" style="position:absolute;left:140px;top:630px;width:1640px;padding:16px 36px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:40px">
+      <div><span>✓</span>schema / catalog end-state checks</div><div><span>✓</span>fresh app inserts &amp; updates still behave</div>
+      <div data-s="4"><span>✓</span>no app transaction &gt; 500 ms</div><div data-s="4"><span>✓</span>no app connection errors</div></div></div>
+  <div data-s="5" style="position:absolute;left:140px;top:800px;font-size:44px;font-weight:750">No LLM judge. No hand-written answer key. <span style="color:var(--s0)">Postgres decides.</span></div>
+</div>
+
+<!-- 6 DEMO -->
+<div class="scene" id="sc-demo">
+  <div class="chapter"><b>04</b>Same ticket, two scripts, live database</div>
+  <div class="row">
+    <div class="col" style="flex:0 0 640px">
+      <div data-s="1" class="term" style="margin-bottom:22px"><span class="d"># naive (textbook one-liner)</span>
+ALTER TABLE orders ADD COLUMN region text
+  NOT NULL DEFAULT 'EU';
+<span class="bad">FAIL  LATENCY  peak __NAIVE_PEAK__ ms</span>
+<span class="d">__NAIVE_OVER__ app txns over 500 ms</span></div>
+      <div data-s="4" class="term"><span class="d"># safe: bounded wait, retry in the gaps</span>
+SET lock_timeout = '50ms';
+DO $$ … retry ALTER … pg_sleep(0.2) … $$;
+<span class="ok">PASS  peak __SAFE_PEAK__ ms</span></div>
+      <div data-s="3" style="margin-top:22px"><span class="chip tag-fail" style="font-size:24px">__RANGE__</span></div>
+    </div>
+    <div class="col"><svg id="demoChart" width="1000" height="640"></svg></div>
+  </div>
+</div>
+
+<!-- 7 TRUST -->
+<div class="scene" id="sc-trust">
+  <div class="chapter"><b>05</b>Can you trust the grader?</div>
+  <div class="row">
+    <div class="col" style="flex:0 0 900px">
+      <div data-s="1" class="grid9" id="calibGrid"></div>
+      <div data-s="4" class="card" style="margin-top:16px;font-size:24px;padding:18px 26px;border-color:rgba(250,178,25,.7)"><b style="color:var(--warn)">C4 excluded from all scores:</b> its correct references failed 3 of 10 runs (disk-I/O noise during a 5M-row backfill). A ticket that can fail a right answer doesn't get to grade anyone.</div>
+    </div>
+    <div class="col">
+      <div data-s="2" class="dim" style="font-size:22px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">Gaming attempts the grader catches</div>
+      <div data-s="2" style="font-size:0"><span class="chip tag-fail" style="font-size:22px">DEFAULT 999 = app test data</span><span class="chip tag-fail" style="font-size:22px">INSERT-only trigger</span><span class="chip tag-fail" style="font-size:22px">COMMIT out of deploy txn</span><span class="chip tag-fail" style="font-size:22px">sleep, then naive ALTER</span></div>
+      <div data-s="3" class="card" style="margin-top:20px;font-size:24px;line-height:1.38;padding:22px 28px"><b>The database caught me, too.</b><br>2 of my reference answers were wrong; 1 check would have failed a valid answer.</div>
+      <div data-s="5" class="card" style="margin-top:16px;font-size:24px;line-height:1.38;padding:22px 28px;border-color:rgba(224,82,82,.6)"><b>Contamination caught.</b> An agentic IDE's answers were <span class="fail">100% identical</span> to my private references → quarantined. Final answers only from sources with no file access.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 8 RESULTS -->
+<div class="scene" id="sc-results">
+  <div class="chapter"><b>06</b>Results: trials passed per ticket</div>
+  <div data-s="0" id="resTable"></div>
+  <div data-s="1" class="muted" style="font-size:24px;margin-top:14px">__RESULTS_FOOTNOTE__</div>
+</div>
+
+<!-- 9 H1 -->
+<div class="scene" id="sc-h1">
+  <div class="chapter"><b>07</b>Failure walkthrough · Ticket H1: give every order a public_id</div>
+  <div class="row">
+    <div class="col card" data-s="1" style="padding:24px 34px">
+      <div style="font-size:24px;margin-bottom:10px"><span class="chip tag-fail">FAIL</span><span class="muted">Claude Sonnet 5.5 · trial 2 (also Opus, Haiku)</span></div>
+<code class="blk">ALTER TABLE orders ADD COLUMN public_id uuid;
+ALTER TABLE orders ALTER COLUMN public_id
+  SET DEFAULT gen_random_uuid();
+<span class="hl-bad">ALTER TABLE orders
+  ADD CONSTRAINT orders_public_id_nn
+  CHECK (public_id IS NOT NULL) NOT VALID;</span><span class="dim">-- no trigger anywhere</span>
+UPDATE orders SET public_id = gen_random_uuid()
+  WHERE id BETWEEN … AND public_id IS NULL;
+<span class="dim">-- … VALIDATE, SET NOT NULL</span></code>
+    </div>
+    <div class="col card" data-s="5" style="padding:24px 34px">
+      <div style="font-size:24px;margin-bottom:10px"><span class="chip tag-pass">PASS</span><span class="muted">Claude Opus 5.5 · trial 1</span></div>
+<code class="blk">ALTER TABLE orders
+  ADD CONSTRAINT orders_public_id_not_null
+  CHECK (public_id IS NOT NULL) NOT VALID;
+<span class="hl-good">CREATE TRIGGER orders_public_id_fill
+  BEFORE INSERT OR UPDATE ON orders
+  FOR EACH ROW WHEN (NEW.public_id IS NULL)
+  … NEW.public_id := gen_random_uuid();</span><span class="dim">-- the app's UPDATE now fills old rows</span></code>
+    </div>
+  </div>
+  <div data-s="3" class="term" style="margin-top:24px;font-size:22px"><span class="d">pgbench (the app):</span>
+<span class="bad">ERROR:  new row for relation "orders" violates check constraint "orders_public_id_nn"</span>
+<span class="bad">8 / 8 app connections died</span></div>
+  <div data-s="4" style="margin-top:20px"><span class="chip tag-pass">schema ✓</span><span class="chip tag-pass">all rows distinct ✓</span><span class="chip tag-pass">latency ✓ (58 ms)</span><span class="chip tag-fail">the app ✗</span></div>
+</div>
+
+<!-- 10 NUANCE -->
+<div class="scene" id="sc-nuance">
+  <div class="chapter"><b>08</b>Two honest footnotes</div>
+  <div class="row">
+    <div class="col card" data-s="1"><div class="dim" style="font-size:22px;letter-spacing:.1em;text-transform:uppercase">Ticket H5 · "repair the data, then enforce"</div>
+      <div style="font-size:64px;font-weight:800;margin:14px 0" class="pass">__H5_FRONTIER__</div>
+      <div style="font-size:30px;line-height:1.4">frontier runs passed. When the ticket <b>names</b> the repair, models do it first and avoid the trap.</div></div>
+    <div class="col card" data-s="2"><div class="dim" style="font-size:22px;letter-spacing:.1em;text-transform:uppercase">Pilot finding · GPT-6.1 Sol retry loop</div>
+      <div style="font-size:30px;line-height:1.4;margin:14px 0">175 ms lock wait, 10 ms pause → an exclusive lock request sits in the queue <b>95%</b> of the time → app stalls 0.5–2.8 s (6/6 runs).</div>
+      <div id="dutyBars"></div>
+      <div style="font-size:28px;margin-top:12px">Ablation: <span class="mono">pg_sleep(0.01→0.2)</span> → <span class="pass">PASS 236 ms</span></div></div>
+  </div>
+  <div data-s="3" class="card" style="margin-top:26px;font-size:30px">On the final prompt Sol wrote a safer loop (C1 3/3 pass) → reported as a <b>hazard</b>, not a headline.</div>
+</div>
+
+<!-- 11 TAKEAWAY -->
+<div class="scene" id="sc-takeaway">
+  <div class="chapter"><b>09</b>The lesson</div>
+  <div data-s="1" style="font-size:58px;line-height:1.18;font-weight:750;max-width:1600px">Frontier models have memorized the safe-migration playbook.<br><span class="muted">They miss what it doesn't spell out:</span></div>
+  <div data-s="2" style="margin:30px 0 36px"><span class="chip" style="font-size:32px">a NOT VALID constraint that still fires</span><span class="chip" style="font-size:32px">a retry loop polite to the DB, not the app</span></div>
+  <div data-s="3" style="font-size:40px;font-weight:650;color:var(--s0);margin-bottom:34px">You only find those by running the plan against a live system.</div>
+  <div data-s="4" class="term" style="width:1400px;font-size:30px"><span class="p">$</span> make up            <span class="d"># Postgres 17 + load, 5M-row seed</span>
+<span class="p">$</span> make calibrate N=5 <span class="d"># refs 5/5 pass, mutations 5/5 fail</span>
+<span class="p">$</span> make regrade       <span class="d"># re-grade every shipped answer, no API key</span></div>
+  <div data-t="__END_CARD_AT__" class="dim" style="font-size:28px;margin-top:30px">README · per-trial logs &amp; transcripts · CHALLENGES_LOG (__LOG_N__ entries, incl. my own mistakes) · built Nov 6–9, 2026</div>
+</div>
+
+<div id="cap"></div>
+
+<script>
+const DATA = __DATA__;
+const T = DATA.timings, scenes = T.scenes;
+const $ = s => document.querySelector(s);
+const clamp = (x,a,b)=>Math.max(a,Math.min(b,x));
+const ease = x => 1-Math.pow(1-clamp(x,0,1),3);
+
+// ---------- static builders ----------
+function latencyChart(svg, series, W, H, opts){
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const L=90,R=20,Tp=20,B=60, xs=series.flatMap(s=>s.points.map(p=>p[0])), x0=Math.min(...xs), x1=Math.max(...xs);
+  const ymax=Math.max(...series.flatMap(s=>s.points.map(p=>p[1])), opts.budget)*1.1;
+  const sx=x=>L+(x-x0)/(x1-x0)*(W-L-R), sy=y=>Tp+(1-y/ymax)*(H-Tp-B);
+  let g='';
+  const step = ymax>6000?2000:(ymax>2000?1000:250);
+  for(let v=0;v<=ymax;v+=step) g+=`<line x1="${L}" x2="${W-R}" y1="${sy(v)}" y2="${sy(v)}" stroke="#33332f"/><text x="${L-12}" y="${sy(v)+8}" fill="#8d8c84" font-size="22" text-anchor="end">${(v/1000).toFixed(v%1000?1:0)}s</text>`;
+  for(let x=Math.ceil(x0);x<=x1;x+=2) g+=`<text x="${sx(x)}" y="${H-B+34}" fill="#8d8c84" font-size="22" text-anchor="middle">${x}</text>`;
+  g+=`<text x="${(L+W-R)/2}" y="${H-6}" fill="#8d8c84" font-size="22" text-anchor="middle">seconds since the migration started</text>`;
+  g+=`<line x1="${L}" x2="${W-R}" y1="${sy(opts.budget)}" y2="${sy(opts.budget)}" stroke="#c3c2b7" stroke-width="2" stroke-dasharray="8 6"/>`;
+  g+=`<text x="${L+10}" y="${sy(opts.budget)-10}" fill="#c3c2b7" font-size="22">budget 500 ms</text>`;
+  series.forEach((s,i)=>{
+    const d=s.points.map((p,j)=>(j?'L':'M')+sx(p[0]).toFixed(1)+','+sy(p[1]).toFixed(1)).join(' ');
+    g+=`<path class="ln" data-i="${i}" d="${d}" fill="none" stroke="${s.color}" stroke-width="4" stroke-linejoin="round"/>`;
+    const pk=s.points.reduce((a,b)=>b[1]>a[1]?b:a);
+    const ly = pk[1] < opts.budget*1.5 ? sy(opts.budget)-46 : sy(pk[1])-14;
+    const right = sx(pk[0]) > L + (W-L-R)*0.5, lx = right ? Math.min(sx(pk[0])-12, W-R) : sx(pk[0])+12;
+    g+=`<text class="lbl" data-i="${i}" x="${lx}" y="${ly}" text-anchor="${right?'end':'start'}" fill="#f0efec" font-size="28" font-weight="700">${s.label} · peak ${pk[1].toLocaleString()} ms</text>`;
+  });
+  g+=`<rect class="mask" x="${L}" y="0" width="${W-L-R}" height="${H-B+6}" fill="#121212"/>`;
+  svg.innerHTML=g; svg._geom={L,R,W};
+}
+function revealChart(svg, frac, visible){
+  const m=svg.querySelector('.mask'); if(!m) return; const {L,R,W}=svg._geom;
+  m.setAttribute('x', L+(W-L-R)*clamp(frac,0,1)); m.setAttribute('width', (W-L-R)*(1-clamp(frac,0,1))+2);
+  svg.querySelectorAll('.ln,.lbl').forEach(e=>{ const i=+e.dataset.i; e.style.opacity = visible[i]===undefined?1:visible[i]; });
+}
+function buildSat(){
+  const el=$('#satBars'); el.innerHTML=DATA.pilot1.map(r=>`<div style="display:flex;align-items:center;margin:0 0 16px"><div style="width:440px;font-size:30px">${r[0]}</div><div class="bar sat" data-w="${r[1]/89}" style="width:0px"></div><div style="font-size:30px;margin-left:16px;font-variant-numeric:tabular-nums" class="sv">${r[1]}/89</div></div>`).join('');
+}
+function buildQueue(){ $('#queueRow').innerHTML = Array.from({length:11},(_,i)=>`<span class="q" style="display:inline-block;width:46px;height:46px;border-radius:10px;margin-right:8px;background:rgba(224,82,82,.35);border:2px solid var(--crit);opacity:0"></span>`).join(''); }
+function buildCalib(){
+  const c=DATA.calib; let h='<div class="h">ticket</div><div class="h">references (must pass)</div><div class="h">mutations (must fail)</div>';
+  c.forEach(r=>{ h+=`<div>${r.t}</div><div class="${r.refOk?'pass':'fail'}">${r.ref}</div><div class="${r.mutOk?'pass':'fail'}">${r.mut}</div>`; });
+  $('#calibGrid').innerHTML=h;
+}
+function buildRes(){
+  const R=DATA.results; const tk=R.tickets;
+  let h='<table class="res"><tr><th class="l">model</th><th class="l">channel</th>'+tk.map(t=>`<th>${t}</th>`).join('')+'<th>pass@1</th></tr>';
+  R.rows.forEach(r=>{ h+=`<tr><td class="l"><b>${r.model}</b></td><td class="l dim" style="font-size:22px">${r.channel}</td>`+r.cells.map((c,i)=>{
+      const cls = c==='–'||c.startsWith('(')?'cell-na':(c.split('/')[0]===c.split('/')[1]?'cell-pass':(c.startsWith('0/')?'cell-fail':'cell-part'));
+      return `<td class="${cls} ${tk[i]==='H1'?'hi':''}">${c}</td>`;}).join('')+`<td><b>${r.p1}</b></td></tr>`; });
+  $('#resTable').innerHTML=h+'</table>';
+}
+function buildDuty(){ $('#dutyBars').innerHTML = `<div style="display:flex;height:40px;border-radius:8px;overflow:hidden;margin:6px 0">`+
+  Array.from({length:6},()=>`<div style="flex:175;background:rgba(224,82,82,.55)"></div><div style="flex:10;background:#0ca30c"></div>`).join('')+`</div><div class="dim" style="font-size:22px">red: exclusive request queued (app blocked) · green: app can write</div>`; }
+
+latencyChart($('#hookChart'), [DATA.c1.naive], 1640, 420, {budget:500});
+latencyChart($('#demoChart'), [DATA.c1.safe, DATA.c1.naive], 1000, 640, {budget:500});
+buildSat(); buildQueue(); buildCalib(); buildRes(); buildDuty();
+
+// ---------- timeline ----------
+const els = [...document.querySelectorAll('[data-s],[data-t]')];
+function sceneAt(t){ for(let i=scenes.length-1;i>=0;i--) if(t>=scenes[i].start) return i; return 0; }
+window.setT = function(t){
+  const total = DATA.total;
+  $('#progress').style.width = (100*clamp(t/total,0,1))+'%';
+  const si = sceneAt(t);
+  scenes.forEach((s,i)=>{
+    const el = document.getElementById('sc-'+s.id); if(!el) return;
+    const end = (i+1<scenes.length? scenes[i+1].start : total);
+    let o = 0;
+    if (t>=s.start && t<end) o = clamp((t-s.start)/0.35,0,1);
+    if (i+1<scenes.length && t>=end-0.0 && t<end+0.35) o = clamp(1-(t-end)/0.35,0,1);
+    el.style.opacity = o; el.style.display = o>0?'block':'none';
+  });
+  const S = scenes[si], lt = t - S.start;
+  els.forEach(e=>{
+    const sc = e.closest('.scene'); if(!sc || sc.id!=='sc-'+S.id) return;
+    let at = e.dataset.t!==undefined ? +e.dataset.t : (S.sentences[+e.dataset.s]||S.sentences[S.sentences.length-1]).start - S.start;
+    const p = ease((lt-at)/0.5);
+    e.style.opacity = p; e.style.transform = `translateY(${(1-p)*24}px)`;
+  });
+  // captions
+  const cur = S.sentences.find(x=>t>=x.start-0.05 && t<=x.end+0.25);
+  $('#cap').textContent = cur? cur.text : '';
+  // scene-specific animation
+  if (S.id==='hook'){ revealChart($('#hookChart'), (lt-(S.sentences[2].start-S.start))/2.2, {}); }
+  if (S.id==='demo'){
+    const a=S.sentences[2].start-S.start, b=S.sentences[4].start-S.start;
+    revealChart($('#demoChart'), (lt-a)/3.0, {0: clamp((lt-b)/0.6,0,1), 1: 1});
+  }
+  if (S.id==='saturated'){ const a=S.sentences[2].start-S.start;
+    document.querySelectorAll('.sat').forEach((b,i)=>{ b.style.width = (900*+b.dataset.w*ease((lt-a-i*0.12)/0.9))+'px'; }); }
+  if (S.id==='why'){ const a=S.sentences[2].start-S.start;
+    document.querySelectorAll('.q').forEach((q,i)=>{ q.style.opacity = clamp((lt-a-0.4-i*0.18)/0.3,0,1); }); }
+};
+window.setT(0);
+</script>
+</body></html>

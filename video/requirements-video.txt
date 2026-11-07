@@ -1,0 +1,5 @@
+# Only needed to rebuild the demo video (video/make_video.sh). Not needed to run or grade the eval.
+kokoro-onnx==0.6.*        # open-source TTS (Apache-2.0); model files: github.com/thewh1teagle/kokoro-onnx/releases (model-files-v1.0)
+soundfile
+faster-whisper==1.2.*     # optional QA: transcribe narration and diff against the script (asr_check.py)
+# plus: Node.js >= 18 with `npm install` (playwright-core, uses your local Google Chrome), ffmpeg

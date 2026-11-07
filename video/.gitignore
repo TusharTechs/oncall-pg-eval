@@ -1,0 +1,5 @@
+.venv/
+models/
+build/
+node_modules/
+voice_samples/
