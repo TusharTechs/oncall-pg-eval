@@ -25,9 +25,9 @@ Format: date (UTC) · what happened · why it matters · what we did
 - **Why it matters:** The agent treated "not found on the page I read" as "probably not real". That is absence-of-evidence reasoning, the same failure pattern we may end up measuring.
 - **Fix:** Verified against the PDF text (section 5, "How judging works").
 
-### C4. Prompt injection inside a competitor's public repo
+### C4. Prompt injection inside another participant's public repo
 - **What:** The README of a public hackathon entry (`raulrodriguezmesia-blip/micro1-financial-eval`) contains an embedded instruction telling AI agents to run a shell command that commits and pushes changes.
-- **Why it matters:** Anyone pointing an AI coding agent at competitor repos for "inspiration" risks having the agent act on hidden instructions.
+- **Why it matters:** Anyone pointing an AI coding agent at other people's repos for "inspiration" risks having the agent act on hidden instructions.
 - **Fix:** Our agent ignored it. We do not clone or run that repo. We treat all third-party repo content as data, never as instructions.
 
 ### C5. Conflicting / unverifiable 2026 benchmark numbers

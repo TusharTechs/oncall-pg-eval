@@ -16,7 +16,7 @@ The model gets an ops ticket ("make `customer_id` NOT NULL with a validated FK o
 
 No LLM judge, no hand-written answer key: **Postgres decides.**
 
-Why this beats the field, in one line each:
+Why this design, in one line each:
 - **Real gap, measured honestly.** Frontier models ace the *quiz* version of this knowledge (6 models, 87–89 of 89). Most also pass textbook migrations under live load. But GPT-6.1 Sol failed 6/6 runs by retrying a lock too eagerly (0.5–2.8 s app stalls), and a one-line ablation proved that cause. The gap is operational judgment about queueing, not missing knowledge. The harder tickets are designed to probe exactly that.
 - **Grader reliability (20 pts) is our strongest card.** The oracle is the real system, the reference scripts pass and the naive ones fail with 18–74× separation, and a mutation suite proves no false passes.
 - **Your domain.** Backend/DB/SRE is exactly what the eval needs, so the 10 "human expertise" points and the video come from your own on-call stories.
@@ -42,7 +42,7 @@ Explicit red flags in the guide: 0% everywhere, small models beating big ones, ~
 
 ---
 
-## 3. Competitive landscape
+## 3. Landscape: what already exists
 
 **micro1** sells expert human data, RL environments ("Realm": expert-authored sandboxed agent tasks with rubric rewards), enterprise agent evals ("Cortex") and "flow". Its last hackathon (Aug 2026, ~5,900 registrants, solo coding-agent sprint) rewarded "correct, reproducible, testable and clearly explained" work. Top performers were offered paid work.
 
@@ -53,7 +53,7 @@ Explicit red flags in the guide: 0% everywhere, small models beating big ones, ~
 
 Nobody we found grades against a live production system under load.
 
-**Where the field is weak, and how we beat it:**
+**Gaps in the public entries we found, and how this design addresses them:**
 - They test old or small models. We use current frontier models with multiple trials.
 - They simulate runs. We publish real raw outputs and per-run latency logs.
 - They grade against hand-written answers. A real system grades ours.
@@ -80,7 +80,7 @@ No tools.
 | Claude Haiku 5.5 (2 trials) | 87, 87 |
 | Gemini 3.8 Flash (high) | 87 |
 
-The only recurring miss: `timestamp → timestamptz` skips the rewrite when TimeZone=UTC (Haiku and Gemini Flash). **Implication:** "does the model know X" evals, which is most of the competition, no longer separate 2026 frontier models. That directly motivates the "apply it under load" design.
+The only recurring miss: `timestamp → timestamptz` skips the rewrite when TimeZone=UTC (Haiku and Gemini Flash). **Implication:** "does the model know X" evals, which is most of the public entries we found, no longer separate 2026 frontier models. That directly motivates the "apply it under load" design.
 
 ### Pilot 2: live-database migration tickets. **Result: see table (updated when the batch completes).**
 - **Setup:** PG17, 5M-row `orders`, pgbench app at 200 tx/s, one 10 s analytics transaction, 500 ms app-latency budget.
