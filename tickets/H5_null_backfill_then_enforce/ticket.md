@@ -1,0 +1,2 @@
+## Ticket H5: repair customer_id, then enforce it
+Set `customer_id` of every order listed in `legacy_customer_map` to the mapped value. Then make `orders.customer_id` NOT NULL as a real column constraint (`pg_attribute.attnotnull = true`) and enforce it with a validated foreign key to `customers(id)` (a `pg_constraint` row with `contype = 'f'` and `convalidated = true`). No other column of any existing row may change. Extra helper constraints may remain or be dropped.

@@ -1,0 +1,2 @@
+## Ticket C4: derived column with backfill
+Add a column `amount_cents bigint` to `orders` such that, when your script finishes and from then on, every row has `amount_cents = (amount * 100)::bigint` and the column is NOT NULL (`pg_attribute.attnotnull = true`). This includes existing rows, rows the app inserts during the migration, rows inserted later, and rows whose `amount` is updated later. The app will not be changed and does not know about this column. You may create functions and triggers.

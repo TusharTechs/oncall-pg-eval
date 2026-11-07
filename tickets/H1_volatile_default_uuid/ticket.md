@@ -1,0 +1,2 @@
+## Ticket H1: public ids
+Add a column `public_id uuid NOT NULL` to `orders` whose column default is `gen_random_uuid()`. When your script finishes, every row (existing rows and rows the app inserted during the migration) must have a non-NULL `public_id`, all values must be distinct, and rows the app inserts later must get one automatically. Do not add a unique constraint or index (a later ticket does that).

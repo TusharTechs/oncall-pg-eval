@@ -1,0 +1,6 @@
+\set id random(1, 5000000)
+\set cid random(1, 200000)
+BEGIN;
+UPDATE orders SET qty = qty + 1 WHERE id = :id;
+INSERT INTO orders(customer_id, external_ref, qty, status, amount) VALUES (:cid, 'app-' || gen_random_uuid(), 1, 'new', 9.99);
+COMMIT;

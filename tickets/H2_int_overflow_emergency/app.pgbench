@@ -1,0 +1,5 @@
+\set id random(1, 5000000)
+BEGIN;
+UPDATE orders SET qty = qty + 1 WHERE id = :id;
+INSERT INTO events(order_id, kind) VALUES (:id, 'qty_changed');
+COMMIT;
